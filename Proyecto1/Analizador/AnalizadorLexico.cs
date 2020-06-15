@@ -43,7 +43,7 @@ namespace Proyecto1.Analizador
                         {
                             if (reservada(lexema) == true)
                             {
-                                lst_token.Add(new Token(Tipo.RESERVADA, lexema.ToUpper(), filaL, columna));
+                               
                                 lexema = "";
                             }
                             else
@@ -370,54 +370,72 @@ namespace Proyecto1.Analizador
         {
             if (lexema.Equals("crear"))
             {
+                lst_token.Add(new Token(Tipo.CREAR, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("tabla"))
             {
+                lst_token.Add(new Token(Tipo.TABLA, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("insertar"))
             {
+                lst_token.Add(new Token(Tipo.INSERTAR, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("en"))
             {
+                lst_token.Add(new Token(Tipo.EN, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("valores"))
             {
+                lst_token.Add(new Token(Tipo.VALORES, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("seleccionar"))
             {
+                lst_token.Add(new Token(Tipo.SELECCIONAR, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("de"))
             {
+                lst_token.Add(new Token(Tipo.DE, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("donde"))
             {
+                lst_token.Add(new Token(Tipo.DONDE, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("y"))
             {
+                lst_token.Add(new Token(Tipo.Y, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("o"))
             {
+                lst_token.Add(new Token(Tipo.O, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("eliminar"))
             {
+                lst_token.Add(new Token(Tipo.ELIMINAR, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("actualizar"))
             {
+                lst_token.Add(new Token(Tipo.ACTUALIZAR, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else if (lexema.Equals("establecer"))
             {
+                lst_token.Add(new Token(Tipo.ESTABLECER, lexema.ToUpper(), filaL, columna));
+                return true;
+            }
+            else if (lexema.Equals("como"))
+            {
+                lst_token.Add(new Token(Tipo.COMO, lexema.ToUpper(), filaL, columna));
                 return true;
             }
             else

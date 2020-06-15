@@ -7,9 +7,22 @@ using System.Threading.Tasks;
 namespace Proyecto1.Clases
 {
     enum Tipo
-    {
+    {   S,
         ID,
-        RESERVADA,
+        EN,
+        CREAR,
+        TABLA,
+        INSERTAR,
+        VALORES,
+        SELECCIONAR,
+        COMO,
+        DE,
+        DONDE,
+        Y,
+        O,
+        ELIMINAR,
+        ACTUALIZAR,
+        ESTABLECER,
         ENTERO,
         FLOTANTE,
         FECHA,

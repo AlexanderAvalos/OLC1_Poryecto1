@@ -84,7 +84,7 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
@@ -97,7 +97,7 @@
             // guardarComoToolStripMenuItem
             // 
             this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.guardarComoToolStripMenuItem.Text = "Guardar como";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
@@ -145,6 +145,7 @@
             this.mostrarTokenToolStripMenuItem.Name = "mostrarTokenToolStripMenuItem";
             this.mostrarTokenToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.mostrarTokenToolStripMenuItem.Text = "Mostrar token";
+            this.mostrarTokenToolStripMenuItem.Click += new System.EventHandler(this.mostrarTokenToolStripMenuItem_Click);
             // 
             // mostrarArbolDeDerivacionToolStripMenuItem
             // 
@@ -157,6 +158,7 @@
             this.mostrarErroresToolStripMenuItem.Name = "mostrarErroresToolStripMenuItem";
             this.mostrarErroresToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.mostrarErroresToolStripMenuItem.Text = "Mostrar Errores";
+            this.mostrarErroresToolStripMenuItem.Click += new System.EventHandler(this.mostrarErroresToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
