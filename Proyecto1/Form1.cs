@@ -20,6 +20,7 @@ namespace Proyecto1
         public Form1()
         {
             InitializeComponent();
+            Controlador.Start();
         }
 
         private void aToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace Proyecto1
             cadena = Panel.Lines;
             for (int posfila = 0; posfila < cadena.Length; posfila++)
             {
-                analizador.analizadorlexico(cadena[posfila].ToLower() + '\n', posfila);
+                analizador.analizadorlexico(cadena[posfila].ToLower() + '\n', posfila,Panel);
             }
         }
 
@@ -161,8 +162,9 @@ namespace Proyecto1
 
         private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+           
             analizador_lexico();
-            analizador_sintactico();
+            //analizador_sintactico();
         }
 
         private void mostrarTokenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,6 +175,35 @@ namespace Proyecto1
         private void mostrarErroresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             generarError();
+        }
+
+        private void Controlador_Tick(object sender, EventArgs e)
+        {
+            pictureBox1.Refresh();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            int caracter = 0;
+            int altura = Panel.GetPositionFromCharIndex(0).Y;
+            if (Panel.Lines.Length > 0)
+            {
+                for (int i = 0; i < Panel.Lines.Length; i++)
+                {
+                    e.Graphics.DrawString((i + 1).ToString(), Panel.Font, Brushes.Cyan, pictureBox1.Width - (e.Graphics.MeasureString((i + 1).ToString(), Panel.Font).Width + 10), altura);
+                    caracter += Panel.Lines[i].Length + 1;
+                    altura = Panel.GetPositionFromCharIndex(caracter).Y;
+                }
+            }
+            else
+            {
+                e.Graphics.DrawString((1).ToString(), Panel.Font, Brushes.Cyan, pictureBox1.Width - (e.Graphics.MeasureString((1).ToString(), Panel.Font).Width + 10), altura);
+            }
         }
     }
 }

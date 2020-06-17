@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Proyecto1.Clases
 {
     enum Tipo
-    {   S,
+    {
+        S,
         ID,
         EN,
         CREAR,
@@ -27,6 +28,10 @@ namespace Proyecto1.Clases
         FLOTANTE,
         FECHA,
         CADENA,
+        TIPO_ENTERO,
+        TIPO_FECHA,
+        TIPO_CADENA,
+        TIPO_FLOTANTE,
         COMENTARIO,
         SIMBOLO_ASTERISCO,
         SIMBOLO_MAYORIGUAL,

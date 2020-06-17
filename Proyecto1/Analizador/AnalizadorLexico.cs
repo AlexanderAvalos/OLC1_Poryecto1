@@ -1,9 +1,11 @@
 ﻿using Proyecto1.Clases;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Proyecto1.Analizador
 {
@@ -17,10 +19,13 @@ namespace Proyecto1.Analizador
         private int columna;
         public List<Token> lst_token = new List<Token>();
         public List<Errores> lst_errores = new List<Errores>();
-
-        public void analizadorlexico(string linea, int fila)
+        private bool vacio = true;
+        private int contador = 1;
+        private RichTextBox pan = new RichTextBox();
+        public void analizadorlexico(string linea, int fila, RichTextBox panel)
         {
             filaL = fila;
+            pan = panel;
             char[] caracter;
             char codCaracter;
             int carac = 0;
@@ -34,7 +39,7 @@ namespace Proyecto1.Analizador
                 switch (estado)
                 {
                     case 1:
-                        if (char.IsLetterOrDigit(codCaracter))
+                        if (char.IsLetterOrDigit(codCaracter) || codCaracter == '_')
                         {
                             lexema = lexema + codCaracter;
                             estado = 1;
@@ -43,12 +48,12 @@ namespace Proyecto1.Analizador
                         {
                             if (reservada(lexema) == true)
                             {
-                               
                                 lexema = "";
                             }
                             else
                             {
                                 lst_token.Add(new Token(Tipo.ID, lexema, filaL, columna));
+                                Colores(lexema, Color.SaddleBrown);
                                 lexema = "";
                             }
                             columna--;
@@ -66,6 +71,7 @@ namespace Proyecto1.Analizador
                             if (codCaracter != '.')
                             {
                                 lst_token.Add(new Token(Tipo.ENTERO, lexema, filaL, columna));
+                                Colores(lexema, Color.Blue);
                                 lexema = "";
                                 estado = iniciales(codCaracter);
                             }
@@ -81,6 +87,7 @@ namespace Proyecto1.Analizador
                         {
                             lexema = lexema + codCaracter;
                             lst_token.Add(new Token(Tipo.COMENTARIO, lexema, filaL, columna));
+                            Colores(lexema, Color.LightGray);
                             lexema = "";
                             estado = iniciales(codCaracter);
                             continua = false;
@@ -99,6 +106,7 @@ namespace Proyecto1.Analizador
                         {
                             lexema = lexema + codCaracter;
                             lst_token.Add(new Token(Tipo.COMENTARIO, lexema, filaL, columna));
+                            Colores(lexema, Color.LightGray);
                             lexema = "";
                             estado = iniciales(codCaracter);
                             continua = false;
@@ -117,12 +125,14 @@ namespace Proyecto1.Analizador
                         {
                             lexema = lexema + codCaracter;
                             lst_token.Add(new Token(Tipo.SIMBOLO_MAYORIGUAL, lexema, filaL, columna));
+                            Colores(lexema, Color.Red);
                             lexema = "";
                             estado = 0;
                         }
                         else
                         {
                             lst_token.Add(new Token(Tipo.SIMBOLO_MAYOR, lexema, filaL, columna));
+                            Colores(lexema, Color.Red);
                             estado = 0;
                         }
                         break;
@@ -155,8 +165,9 @@ namespace Proyecto1.Analizador
                         break;
                     case 10:
                         lst_token.Add(new Token(Tipo.CADENA, lexema, filaL, columna));
+                        Colores(lexema, Color.Green);
                         lexema = "";
-                        estado = 0;
+                        estado = iniciales(codCaracter);
                         break;
                     case 11:
                         if (char.IsDigit(codCaracter))
@@ -174,6 +185,7 @@ namespace Proyecto1.Analizador
                         else
                         {
                             lst_token.Add(new Token(Tipo.FLOTANTE, lexema, filaL, columna));
+                            Colores(lexema, Color.Blue);
                             lexema = "";
                             estado = iniciales(codCaracter);
 
@@ -244,6 +256,7 @@ namespace Proyecto1.Analizador
                         break;
                     case 22:
                         lst_token.Add(new Token(Tipo.FECHA, lexema, filaL, columna));
+                        Colores(lexema, Color.Orange);
                         lexema = "";
                         estado = 0;
                         break;
@@ -252,12 +265,14 @@ namespace Proyecto1.Analizador
                         {
                             lexema = lexema + codCaracter;
                             lst_token.Add(new Token(Tipo.SIMBOLO_MENORIGUAL, lexema, filaL, columna));
+                            Colores(lexema, Color.Red);
                             lexema = "";
                             estado = 0;
                         }
                         else
                         {
                             lst_token.Add(new Token(Tipo.SIMBOLO_MENOR, lexema, filaL, columna));
+                            Colores(lexema, Color.Red);
                             estado = 0;
                         }
                         break;
@@ -266,6 +281,7 @@ namespace Proyecto1.Analizador
                         {
                             lexema = lexema + codCaracter;
                             lst_token.Add(new Token(Tipo.SIMBOLO_DIFERENTE, lexema, filaL, columna));
+                            Colores(lexema, Color.Red);
                             lexema = "";
                             estado = 0;
                         }
@@ -312,32 +328,44 @@ namespace Proyecto1.Analizador
             }
             else if (codCaracter == '.')
             {
-                lst_token.Add(new Token(Tipo.SIMBOLO_PUNTO, lexema, filaL, columna));
+                lst_token.Add(new Token(Tipo.SIMBOLO_PUNTO, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Black);
                 return 0;
             }
             else if (codCaracter == ',')
             {
-                lst_token.Add(new Token(Tipo.SIMBOLO_COMA, lexema, filaL, columna));
+                lst_token.Add(new Token(Tipo.SIMBOLO_COMA, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Black);
                 return 0;
             }
             else if (codCaracter == '*')
             {
-                lst_token.Add(new Token(Tipo.SIMBOLO_ASTERISCO, lexema, filaL, columna));
+                lst_token.Add(new Token(Tipo.SIMBOLO_ASTERISCO, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Black);
+                return 0;
+            }
+            else if (codCaracter == ';')
+            {
+                lst_token.Add(new Token(Tipo.SIMBOLO_PUNTOYCOMA, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Black);
                 return 0;
             }
             else if (codCaracter == '(')
             {
-                lst_token.Add(new Token(Tipo.SIMBOLO_PARENTESISIZQ, lexema, filaL, columna));
+                lst_token.Add(new Token(Tipo.SIMBOLO_PARENTESISIZQ, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Black);
                 return 0;
             }
             else if (codCaracter == ')')
             {
-                lst_token.Add(new Token(Tipo.SIMBOLO_PARENTESISDER, lexema, filaL, columna));
+                lst_token.Add(new Token(Tipo.SIMBOLO_PARENTESISDER, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Black);
                 return 0;
             }
             else if (codCaracter == '=')
             {
-                lst_token.Add(new Token(Tipo.SIMBOLO_IGUAL, lexema, filaL, columna));
+                lst_token.Add(new Token(Tipo.SIMBOLO_IGUAL, codCaracter + lexema, filaL, columna));
+                Colores(codCaracter + lexema, Color.Red);
                 return 0;
             }
             else if (codCaracter == '<')
@@ -357,11 +385,13 @@ namespace Proyecto1.Analizador
             }
             else if (caracter == 9 || caracter == 13 || caracter == 32 || caracter == 10)
             {
+                Colores(codCaracter + "", Color.Transparent);
                 return 0;
             }
             else
             {
-                lst_errores.Add(new Errores("Lexico", "Caracter no pertenece al lenguaje", filaL,columna));
+                lst_errores.Add(new Errores("Lexico", "Caracter no pertenece al lenguaje", filaL, columna));
+
                 return 0;
             }
         }
@@ -371,76 +401,130 @@ namespace Proyecto1.Analizador
             if (lexema.Equals("crear"))
             {
                 lst_token.Add(new Token(Tipo.CREAR, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("tabla"))
             {
                 lst_token.Add(new Token(Tipo.TABLA, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Purple);
+                return true;
+            }
+            else if (lexema.Equals("entero"))
+            {
+                lst_token.Add(new Token(Tipo.TIPO_ENTERO, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
+                return true;
+            }
+            else if (lexema.Equals("cadena"))
+            {
+                lst_token.Add(new Token(Tipo.TIPO_CADENA, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
+                return true;
+            }
+            else if (lexema.Equals("fecha"))
+            {
+                lst_token.Add(new Token(Tipo.TIPO_FECHA, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
+                return true;
+            }
+            else if (lexema.Equals("flotante"))
+            {
+                lst_token.Add(new Token(Tipo.TIPO_FLOTANTE, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("insertar"))
             {
                 lst_token.Add(new Token(Tipo.INSERTAR, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Purple);
                 return true;
             }
             else if (lexema.Equals("en"))
             {
                 lst_token.Add(new Token(Tipo.EN, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("valores"))
             {
                 lst_token.Add(new Token(Tipo.VALORES, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("seleccionar"))
             {
                 lst_token.Add(new Token(Tipo.SELECCIONAR, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("de"))
             {
                 lst_token.Add(new Token(Tipo.DE, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("donde"))
             {
                 lst_token.Add(new Token(Tipo.DONDE, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("y"))
             {
                 lst_token.Add(new Token(Tipo.Y, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("o"))
             {
                 lst_token.Add(new Token(Tipo.O, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("eliminar"))
             {
                 lst_token.Add(new Token(Tipo.ELIMINAR, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Purple);
                 return true;
             }
             else if (lexema.Equals("actualizar"))
             {
                 lst_token.Add(new Token(Tipo.ACTUALIZAR, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Purple);
                 return true;
             }
             else if (lexema.Equals("establecer"))
             {
                 lst_token.Add(new Token(Tipo.ESTABLECER, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else if (lexema.Equals("como"))
             {
                 lst_token.Add(new Token(Tipo.COMO, lexema.ToUpper(), filaL, columna));
+                Colores(lexema.ToUpper(), Color.Black);
                 return true;
             }
             else
                 return false;
         }
+        private void Colores(object obj, Color colort)
+        {
+            if (vacio)
+            {
+                pan.Text = "";
+                vacio = false;
+            }
+            string colortext = obj.ToString();
 
+            pan.SelectionColor = pan.ForeColor;
+            pan.SelectionColor = colort;
+            pan.AppendText(colortext);
+            pan.SelectionStart = pan.TextLength;
+            pan.SelectionFont = new Font("arial", 10, FontStyle.Regular);
+            pan.SelectionLength = pan.SelectionLength + contador++;
+
+        }
     }
 }
