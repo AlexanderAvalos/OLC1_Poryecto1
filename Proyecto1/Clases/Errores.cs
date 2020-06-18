@@ -15,8 +15,8 @@ namespace Proyecto1.Clases
 
         public Errores(string tipo, string descripcion, int fila, int columna)
         {
-            this.tipo = tipo ?? throw new ArgumentNullException(nameof(tipo));
-            this.descripcion = descripcion ?? throw new ArgumentNullException(nameof(descripcion));
+            this.tipo = tipo ;
+            this.descripcion = descripcion ;
             this.fila = fila;
             this.columna = columna;
         }

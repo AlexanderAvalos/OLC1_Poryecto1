@@ -21,5 +21,6 @@ namespace Proyecto1.Analizador
 
         public string Nombre { get => nombre; set => nombre = value; }
         public List<Nodo> Childs { get => childs; set => childs = value; }
+        public int Index { get => index; set => index = value; }
     }
 }

@@ -74,7 +74,7 @@ namespace Proyecto1
 
         private void analizador_sintactico()
         {
-            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_token,analizador.lst_errores);
+            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens,analizador.lst_errores);
             sintactico.parser();
         }
         private void guardar()
@@ -164,7 +164,7 @@ namespace Proyecto1
         {
            
             analizador_lexico();
-            //analizador_sintactico();
+           analizador_sintactico();
         }
 
         private void mostrarTokenToolStripMenuItem_Click(object sender, EventArgs e)
