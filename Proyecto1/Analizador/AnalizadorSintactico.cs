@@ -15,10 +15,12 @@ namespace Proyecto1.Analizador
         private Tipo preanalisis = Tipo.S;
         private List<Token> lst_token = new List<Token>();
         private List<Errores> lst_error = new List<Errores>();
+        private List<Tabla> lst_tablas = new List<Tabla>();
         private int indice = 0;
         private bool correcto = true;
-        Stack<Nodo> stack = new Stack<Nodo>();
+        private Stack<Nodo> stack = new Stack<Nodo>();
         private int index = 0;
+
 
         public AnalizadorSintactico(List<Token> token_inicial, List<Errores> lst_error)
         {
@@ -75,7 +77,6 @@ namespace Proyecto1.Analizador
             match(Tipo.S);
             S();
             Console.WriteLine("terminado");
-            //mandar a graficar tu arbol
             Nodo raiz = stack.Pop();
             graficar(raiz);
         }
@@ -125,7 +126,6 @@ namespace Proyecto1.Analizador
 
         private bool sentecia()
         {
-            Console.WriteLine(preanalisis);
             if (preanalisis == Tipo.CREAR)
             {
                 create();
@@ -159,122 +159,161 @@ namespace Proyecto1.Analizador
 
         private void create()
         {
+            Tabla actual = new Tabla();
+            string nombretabla;
             Nodo nodo = new Nodo(getIndex(), "create", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), "CREAR", null));
             match(Tipo.CREAR);
             nodo.Childs.Add(new Nodo(getIndex(), "TABLA", null));
             match(Tipo.TABLA);
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            nombretabla = lst_token.ElementAt(indice).Lexema;
+            Console.WriteLine(nombretabla);
+           
+            actual.Nombre_tabla = nombretabla;
             match(Tipo.ID);
             nodo.Childs.Add(new Nodo(getIndex(), "(", null));
             match(Tipo.SIMBOLO_PARENTESISIZQ);
-            parametros();
+            List<Columna> lst = parametros();
             Nodo param = stack.Pop();
-            Nodo nodo2 = new Nodo(getIndex(), "parametros", new List<Nodo>());
-            nodo2.Childs.Add(param);
-            nodo.Childs.Add(nodo2);
+            nodo.Childs.Add(param);
             nodo.Childs.Add(new Nodo(getIndex(), ")", null));
             match(Tipo.SIMBOLO_PARENTESISDER);
             nodo.Childs.Add(new Nodo(getIndex(), ";", null));
             match(Tipo.SIMBOLO_PUNTOYCOMA);
             stack.Push(nodo);
+            actual.Nombre_tabla = nombretabla;
+            actual.Columnas = lst;
+            lst_tablas.Add(actual);
         }
 
-        private void parametros()
+        private List<Columna> parametros()
         {
-            parametro();
-            parametrosP();
+            Columna val = parametro();
+            List<Columna> lst = parametrosP();
+            lst.Add(val);
             Nodo paramet = stack.Pop();
             Nodo param = stack.Pop();
             Nodo nodo = new Nodo(getIndex(), "parametros", new List<Nodo>());
-            Nodo nodo2 = new Nodo(getIndex(), "parametro", new List<Nodo>());
-            nodo2.Childs.Add(param);
-            nodo.Childs.Add(nodo2);
+            nodo.Childs.Add(param);
             nodo.Childs.Add(paramet);
             stack.Push(nodo);
+            return lst;
         }
 
-        private void parametrosP()
+        private List<Columna> parametrosP()
         {
-            Console.WriteLine(preanalisis);
 
             if (preanalisis == Tipo.SIMBOLO_COMA)
             {
                 Nodo nodo = new Nodo(getIndex(), "parametrosP", new List<Nodo>());
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
                 match(Tipo.SIMBOLO_COMA);
-                parametro();
-                parametrosP();
-                Nodo nodo2 = new Nodo(getIndex(), "parametro", new List<Nodo>());
+                Columna val = parametro();
+                List<Columna> lst = parametrosP();
+                lst.Add(val);
                 Nodo parametroPrima = stack.Pop();
                 Nodo param = stack.Pop();
-                nodo2.Childs.Add(param);
-                nodo.Childs.Add(nodo2);
+                nodo.Childs.Add(param);
                 nodo.Childs.Add(parametroPrima);
                 stack.Push(nodo);
+                return lst;
             }
             else
             {
                 Nodo nodo = new Nodo(getIndex(), "epsilon", null);
                 stack.Push(nodo);
+                return new List<Columna>();
             }
         }
 
-        private void parametro()
+        private Columna parametro()
         {
+            string id;
             Nodo nodo = new Nodo(getIndex(), "parametro", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            id = lst_token.ElementAt(indice).Lexema;
             match(Tipo.ID);
-            tipo();
+            string tip = tipo();
+            Console.WriteLine(id+" "+ tip);
+            Columna columna_actual = new Columna(id, tip);
             Nodo tipoD = stack.Pop();
             Nodo nodo2 = new Nodo(getIndex(), "Tipo", new List<Nodo>());
             nodo2.Childs.Add(tipoD);
             nodo.Childs.Add(nodo2);
             stack.Push(nodo);
+            return columna_actual;
         }
-
-        private void tipo()
+    
+        private string tipo()
         {
+            String tip;
             if (preanalisis == Tipo.TIPO_ENTERO)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                tip = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.TIPO_ENTERO);
                 stack.Push(nodo);
+                return tip;
             }
             else if (preanalisis == Tipo.TIPO_FLOTANTE)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                tip = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.TIPO_FLOTANTE);
                 stack.Push(nodo);
+                return tip;
             }
             else if (preanalisis == Tipo.TIPO_CADENA)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                tip = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.TIPO_CADENA);
                 stack.Push(nodo);
+                return tip;
             }
             else if (preanalisis == Tipo.TIPO_FECHA)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                tip = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.TIPO_FECHA);
                 stack.Push(nodo);
+                return tip;
+            }
+            else
+            {
+                return "";
             }
 
         }
         private void insert()
         {
+            string nombretabla;
             Nodo nodo = new Nodo(getIndex(), "insert", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), "INSERTAR", null));
             match(Tipo.INSERTAR);
             nodo.Childs.Add(new Nodo(getIndex(), "EN", null));
             match(Tipo.EN);
-            nodo.Childs.Add(new Nodo(getIndex(), "ID", null));
+            nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            nombretabla = lst_token.ElementAt(indice).Lexema;
+            Tabla actual = buscar(nombretabla);
             match(Tipo.ID);
             nodo.Childs.Add(new Nodo(getIndex(), "VALORES", null));
             match(Tipo.VALORES);
             nodo.Childs.Add(new Nodo(getIndex(), "(", null));
             match(Tipo.SIMBOLO_PARENTESISIZQ);
-            valores();
+            List<string> lst_valores = valores();
+            if (actual.Columnas.Count == lst_valores.Count)
+            {
+                Dictionary<string, object> aux = new Dictionary<string, object>();
+                for (int i = 0; i < actual.Columnas.Count; i++)
+                {
+                    string llave = Convert.ToString(actual.Columnas.ElementAt(i).Nombre);
+                    aux.Add(llave, lst_valores.ElementAt(i));
+
+                }
+                actual.Filas.Add(aux);
+            }
             Nodo val = stack.Pop();
             nodo.Childs.Add(val);
             nodo.Childs.Add(new Nodo(getIndex(), ")", null));
@@ -284,10 +323,22 @@ namespace Proyecto1.Analizador
             stack.Push(nodo);
         }
 
-        private void valores()
+        private Tabla buscar(string nombretabla)
         {
-            valor();
-            valoresP();
+            foreach (Tabla item in lst_tablas)
+            {
+                if (nombretabla == item.Nombre_tabla)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+        private List<string> valores()
+        {
+            string valo = valor();
+            List<String> lst_valores = valoresP();
+            lst_valores.Add(valo);
             Nodo valoresPrima = stack.Pop();
             Nodo val = stack.Pop();
             Nodo nodo = new Nodo(getIndex(), "valores", new List<Nodo>());
@@ -296,9 +347,10 @@ namespace Proyecto1.Analizador
             nodo.Childs.Add(nodo2);
             nodo.Childs.Add(valoresPrima);
             stack.Push(nodo);
+            return lst_valores;
         }
 
-        private void valoresP()
+        private List<string> valoresP()
         {
 
             if (preanalisis == Tipo.SIMBOLO_COMA)
@@ -307,48 +359,58 @@ namespace Proyecto1.Analizador
                 Nodo nodo2 = new Nodo(getIndex(), "valor", new List<Nodo>());
                 nodo.Childs.Add(new Nodo(getIndex(), ",", null));
                 match(Tipo.SIMBOLO_COMA);
-                valor();
-                valoresP();
+                string valo = valor();
+                List<String> lst_valores = valoresP();
+                lst_valores.Add(valo);
                 Nodo valoresPrima = stack.Pop();
                 Nodo val = stack.Pop();
                 nodo2.Childs.Add(val);
                 nodo.Childs.Add(nodo2);
                 nodo.Childs.Add(valoresPrima);
                 stack.Push(nodo);
+                return lst_valores;
             }
             else
             {
                 Nodo nodo = new Nodo(getIndex(), "epsilon", null);
                 stack.Push(nodo);
+                return new List<string>();
             }
         }
 
-        private void valor()
+        private string valor()
         {
+            string valore = "";
             if (preanalisis == Tipo.ENTERO)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                valore = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.ENTERO);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.FLOTANTE)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                valore = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.FLOTANTE);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.CADENA)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema.ToString().Replace('"', ' ').Trim(), null);
+                valore = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.CADENA);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.FECHA)
             {
                 Nodo nodo = new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null);
+                valore = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.FECHA);
                 stack.Push(nodo);
             }
+           
+            return valore;
         }
 
         private void select()
@@ -373,6 +435,7 @@ namespace Proyecto1.Analizador
             Nodo nodo4 = new Nodo(getIndex(), "where", new List<Nodo>());
             nodo4.Childs.Add(whe);
             nodo.Childs.Add(nodo4);
+            match(Tipo.SIMBOLO_PUNTOYCOMA);
             stack.Push(nodo);
         }
 
@@ -419,6 +482,8 @@ namespace Proyecto1.Analizador
             {
                 Nodo nodo = new Nodo(getIndex(), "campo", new List<Nodo>());
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+                string id = lst_token.ElementAt(indice).Lexema;
+                Console.Write(id+ "  ");
                 match(Tipo.ID);
                 campoP();
                 Nodo campp = stack.Pop();
@@ -428,6 +493,8 @@ namespace Proyecto1.Analizador
             else if (preanalisis == Tipo.SIMBOLO_ASTERISCO)
             {
                 Nodo nodo = new Nodo(getIndex(), "*", null);
+                string todo = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(todo);
                 match(Tipo.SIMBOLO_ASTERISCO);
                 stack.Push(nodo);
             }
@@ -446,7 +513,7 @@ namespace Proyecto1.Analizador
             }
             else if (como())
             {
-                Nodo nodo = new Nodo(getIndex(), "campoP", new List<Nodo>());
+                Nodo nodo = new Nodo(getIndex(), "como", new List<Nodo>());
                 Nodo com = stack.Pop();
                 nodo.Childs.Add(com);
                 stack.Push(nodo);
@@ -458,6 +525,8 @@ namespace Proyecto1.Analizador
             {
                 Nodo nodo = new Nodo(getIndex(), "campoB", new List<Nodo>());
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+                string id = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(id);
                 match(Tipo.ID);
                 como();
                 Nodo com = stack.Pop();
@@ -468,6 +537,8 @@ namespace Proyecto1.Analizador
             {
                 Nodo nodo = new Nodo(getIndex(), "*", null);
                 match(Tipo.SIMBOLO_ASTERISCO);
+                string todo = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(todo);
                 stack.Push(nodo);
             }
         }
@@ -479,6 +550,8 @@ namespace Proyecto1.Analizador
                 nodo.Childs.Add(new Nodo(getIndex(), "COMO", null));
                 match(Tipo.COMO);
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+                string alias = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(alias);
                 match(Tipo.ID);
                 stack.Push(nodo);
                 return true;
@@ -495,6 +568,8 @@ namespace Proyecto1.Analizador
         {
             Nodo nodo = new Nodo(getIndex(), "tablas", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            string tabla = lst_token.ElementAt(indice).Lexema;
+            Console.WriteLine(tabla);
             match(Tipo.ID);
             tablasP();
             Nodo tablasPrima = stack.Pop();
@@ -511,6 +586,8 @@ namespace Proyecto1.Analizador
                 nodo.Childs.Add(new Nodo(getIndex(), ",", null));
                 match(Tipo.SIMBOLO_COMA);
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+                string ta = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(ta);
                 match(Tipo.ID);
                 tablasP();
                 Nodo tablasPrima = stack.Pop();
@@ -594,6 +671,8 @@ namespace Proyecto1.Analizador
         {
             Nodo nodo = new Nodo(getIndex(), "condicion", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            string todo = lst_token.ElementAt(indice).Lexema;
+            Console.WriteLine(todo);
             match(Tipo.ID);
             condicionP();
             Nodo condicionPrima = stack.Pop();
@@ -609,6 +688,8 @@ namespace Proyecto1.Analizador
                 nodo.Childs.Add(new Nodo(getIndex(), ".", null));
                 match(Tipo.SIMBOLO_PUNTO);
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+                string todo = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(todo);
                 match(Tipo.ID);
                 simbolo();
                 valorP();
@@ -644,11 +725,15 @@ namespace Proyecto1.Analizador
             {
                 Nodo nodo = new Nodo(getIndex(), "valorP", new List<Nodo>());
                 nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+                string todo = lst_token.ElementAt(indice).Lexema;
+                Console.WriteLine(todo);
                 match(Tipo.ID);
-                if (preanalisis == Tipo.SIMBOLO_PUNTOYCOMA)
+                if (preanalisis == Tipo.SIMBOLO_PUNTO)
                 {
                     nodo.Childs.Add(new Nodo(getIndex(), ".", null));
-                    match(Tipo.SIMBOLO_PUNTOYCOMA);
+                    match(Tipo.SIMBOLO_PUNTO);
+                    string id = lst_token.ElementAt(indice).Lexema;
+                    Console.WriteLine(id);
                     nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
                     match(Tipo.ID);
                 }
@@ -667,43 +752,51 @@ namespace Proyecto1.Analizador
         }
         private void simbolo()
         {
-            Console.WriteLine(preanalisis);
+            string todo= "";
             if (preanalisis == Tipo.SIMBOLO_MAYORIGUAL)
             {
                 Nodo nodo = new Nodo(getIndex(), ">=", null);
+                 todo = lst_token.ElementAt(indice).Lexema;
+                
                 match(Tipo.SIMBOLO_MAYORIGUAL);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.SIMBOLO_MENORIGUAL)
             {
                 Nodo nodo = new Nodo(getIndex(), "<=", null);
+                todo = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.SIMBOLO_MENORIGUAL);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.SIMBOLO_DIFERENTE)
             {
                 Nodo nodo = new Nodo(getIndex(), "!=", null);
+                todo = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.SIMBOLO_DIFERENTE);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.SIMBOLO_IGUAL)
             {
                 Nodo nodo = new Nodo(getIndex(), "=", null);
+                todo = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.SIMBOLO_IGUAL);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.SIMBOLO_MAYOR)
             {
                 Nodo nodo = new Nodo(getIndex(), ">", null);
+                todo = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.SIMBOLO_MAYOR);
                 stack.Push(nodo);
             }
             else if (preanalisis == Tipo.SIMBOLO_MENOR)
             {
                 Nodo nodo = new Nodo(getIndex(), "<", null);
+                todo = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.SIMBOLO_MENOR);
                 stack.Push(nodo);
             }
+            Console.WriteLine(todo);
         }
         private void delete()
         {
@@ -712,6 +805,8 @@ namespace Proyecto1.Analizador
             match(Tipo.ELIMINAR);
             nodo.Childs.Add(new Nodo(getIndex(), "DE", null));
             match(Tipo.DE);
+            string id = lst_token.ElementAt(indice).Lexema;
+            Console.WriteLine(id);
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
             match(Tipo.ID);
             where();
@@ -728,6 +823,8 @@ namespace Proyecto1.Analizador
             nodo.Childs.Add(new Nodo(getIndex(), "ACTUALIZAR", null));
             match(Tipo.ACTUALIZAR);
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            string id = lst_token.ElementAt(indice).Lexema;
+            Console.WriteLine(id);
             match(Tipo.ID);
             nodo.Childs.Add(new Nodo(getIndex(), "ESTABLECER", null));
             match(Tipo.ESTABLECER);
@@ -787,6 +884,8 @@ namespace Proyecto1.Analizador
         {
             Nodo nodo = new Nodo(getIndex(), "asignacion", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
+            string id = lst_token.ElementAt(indice).Lexema;
+            Console.WriteLine(id);
             match(Tipo.ID);
             nodo.Childs.Add(new Nodo(getIndex(), "=", null));
             match(Tipo.SIMBOLO_IGUAL);
@@ -795,6 +894,29 @@ namespace Proyecto1.Analizador
             nodo.Childs.Add(val);
             stack.Push(nodo);
         }
+        public void imprimir()
+        {
+            foreach (Tabla item in lst_tablas)
+            {
+                Console.WriteLine(item.Nombre_tabla);
+                foreach (var item2 in item.Columnas)
+                {
+                    Console.Write(item2.Nombre + "  ");
+                }
+                Console.WriteLine();
+                foreach (var item2 in item.Filas)
+                {
+                    for (int i = item2.Count - 1; i >= 0; i--)
+                    {
+                        Console.Write(item2.ElementAt(i).Value + "  ");
+                    }
+                    Console.WriteLine();
+                }
+
+            }
+
+        }
+
         public void graficar(Nodo nodo)
         {
             String rdot = "_arbol.dot";

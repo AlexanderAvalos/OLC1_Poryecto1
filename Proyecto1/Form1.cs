@@ -68,14 +68,15 @@ namespace Proyecto1
             cadena = Panel.Lines;
             for (int posfila = 0; posfila < cadena.Length; posfila++)
             {
-                analizador.analizadorlexico(cadena[posfila].ToLower() + '\n', posfila,Panel);
+                analizador.analizadorlexico(cadena[posfila].ToLower() + '\n', posfila, Panel);
             }
         }
 
         private void analizador_sintactico()
         {
-            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens,analizador.lst_errores);
+            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
             sintactico.parser();
+            sintactico.imprimir();
         }
         private void guardar()
         {
@@ -99,7 +100,7 @@ namespace Proyecto1
         private void generarToken()
         {
 
-            
+
             string ruta = @"Lista Token.htm";
             using (FileStream fs = new FileStream(ruta, FileMode.Create))
             {
@@ -162,9 +163,10 @@ namespace Proyecto1
 
         private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             analizador_lexico();
-           analizador_sintactico();
+            analizador_sintactico();
+
         }
 
         private void mostrarTokenToolStripMenuItem_Click(object sender, EventArgs e)

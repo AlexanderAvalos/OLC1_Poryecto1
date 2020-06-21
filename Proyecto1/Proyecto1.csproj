@@ -49,7 +49,9 @@
     <Compile Include="Analizador\AnalizadorLexico.cs" />
     <Compile Include="Analizador\AnalizadorSintactico.cs" />
     <Compile Include="Analizador\Nodo.cs" />
+    <Compile Include="Clases\Columna.cs" />
     <Compile Include="Clases\Errores.cs" />
+    <Compile Include="Clases\Tabla.cs" />
     <Compile Include="Clases\Tipo.cs" />
     <Compile Include="Clases\Token.cs" />
     <Compile Include="Form1.cs">

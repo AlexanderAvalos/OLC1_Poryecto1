@@ -1,60 +1,80 @@
-digraph { 30[style = "filled" ; label = "S"] 
-28[style = "filled" ; label = "sentencias"] 
-29[style = "filled" ; label = "sentencia"] 
-1[style = "filled" ; label = "update"] 
-2[style = "filled" ; label = "ACTUALIZAR"] 
-3[style = "filled" ; label = "estudiantes"] 
-4[style = "filled" ; label = "ESTABLECER"] 
-5[style = "filled" ; label = "("] 
-12[style = "filled" ; label = "asignaciones"] 
-13[style = "filled" ; label = "asig"] 
-6[style = "filled" ; label = "asignacion"] 
-7[style = "filled" ; label = "nombre"] 
-8[style = "filled" ; label = "="] 
-9[style = "filled" ; label = "valorP"] 
-10[style = "filled" ; label = "alejandro"] 
+digraph { 40[style = "filled" ; label = "S"] 
+38[style = "filled" ; label = "sentencias"] 
+39[style = "filled" ; label = "sentencia"] 
+1[style = "filled" ; label = "select"] 
+2[style = "filled" ; label = "SELECCIONAR"] 
+7[style = "filled" ; label = "campos"] 
+5[style = "filled" ; label = "campos"] 
+6[style = "filled" ; label = "campo"] 
+3[style = "filled" ; label = "*"] 
+4[style = "filled" ; label = "Epsilon"] 
+8[style = "filled" ; label = "DE"] 
+13[style = "filled" ; label = "tablas"] 
+9[style = "filled" ; label = "tablas"] 
+10[style = "filled" ; label = "estudiantes"] 
+12[style = "filled" ; label = "tablasP"] 
 11[style = "filled" ; label = "Epsilon"] 
-14[style = "filled" ; label = ")"] 
-15[style = "filled" ; label = "where"] 
-16[style = "filled" ; label = "DONDE"] 
-26[style = "filled" ; label = "condiciones"] 
-17[style = "filled" ; label = "condicion"] 
-18[style = "filled" ; label = "id_estudiantes"] 
-19[style = "filled" ; label = "condicionP"] 
-20[style = "filled" ; label = "="] 
-22[style = "filled" ; label = "valorP"] 
-23[style = "filled" ; label = "valor"] 
-21[style = "filled" ; label = "1545"] 
-24[style = "filled" ; label = ";"] 
-25[style = "filled" ; label = "Epsilon"] 
-27[style = "filled" ; label = "epsilon"] 
-30->28; 
-28->29; 
-29->1; 
+36[style = "filled" ; label = "where"] 
+14[style = "filled" ; label = "where"] 
+15[style = "filled" ; label = "DONDE"] 
+35[style = "filled" ; label = "condiciones"] 
+16[style = "filled" ; label = "condicion"] 
+17[style = "filled" ; label = "id_estudiante"] 
+18[style = "filled" ; label = "condicionP"] 
+19[style = "filled" ; label = ">"] 
+21[style = "filled" ; label = "valorP"] 
+22[style = "filled" ; label = "valor"] 
+20[style = "filled" ; label = "10"] 
+23[style = "filled" ; label = ";"] 
+24[style = "filled" ; label = "condicionesP"] 
+25[style = "filled" ; label = "Y"] 
+26[style = "filled" ; label = "condicion"] 
+27[style = "filled" ; label = "fecha_nacimiento"] 
+28[style = "filled" ; label = "condicionP"] 
+29[style = "filled" ; label = "!="] 
+31[style = "filled" ; label = "valorP"] 
+32[style = "filled" ; label = "valor"] 
+30[style = "filled" ; label = "'21/12/2012'"] 
+33[style = "filled" ; label = ";"] 
+34[style = "filled" ; label = "Epsilon"] 
+37[style = "filled" ; label = "epsilon"] 
+40->38; 
+38->39; 
+39->1; 
 1->2; 
-1->3; 
-1->4; 
-1->5; 
-1->12; 
-12->13; 
-13->6; 
-6->7; 
-6->8; 
-6->9; 
+1->7; 
+7->5; 
+5->6; 
+6->3; 
+5->4; 
+1->8; 
+1->13; 
+13->9; 
 9->10; 
+9->12; 
 12->11; 
-1->14; 
-1->15; 
-15->16; 
-15->26; 
-26->17; 
-17->18; 
-17->19; 
-19->20; 
-19->22; 
-22->23; 
-23->21; 
-19->24; 
-26->25; 
-28->27; 
+1->36; 
+36->14; 
+14->15; 
+14->35; 
+35->16; 
+16->17; 
+16->18; 
+18->19; 
+18->21; 
+21->22; 
+22->20; 
+18->23; 
+35->24; 
+24->25; 
+24->26; 
+26->27; 
+26->28; 
+28->29; 
+28->31; 
+31->32; 
+32->30; 
+28->33; 
+24->34; 
+38->37; 
 }
