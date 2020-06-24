@@ -1,80 +1,1156 @@
-digraph { 40[style = "filled" ; label = "S"] 
-38[style = "filled" ; label = "sentencias"] 
-39[style = "filled" ; label = "sentencia"] 
+digraph { 578[style = "filled" ; label = "S"] 
+576[style = "filled" ; label = "sentencias"] 
+577[style = "filled" ; label = "sentencia"] 
 1[style = "filled" ; label = "select"] 
 2[style = "filled" ; label = "SELECCIONAR"] 
-7[style = "filled" ; label = "campos"] 
-5[style = "filled" ; label = "campos"] 
-6[style = "filled" ; label = "campo"] 
-3[style = "filled" ; label = "*"] 
-4[style = "filled" ; label = "Epsilon"] 
-8[style = "filled" ; label = "DE"] 
-13[style = "filled" ; label = "tablas"] 
-9[style = "filled" ; label = "tablas"] 
-10[style = "filled" ; label = "estudiantes"] 
-12[style = "filled" ; label = "tablasP"] 
-11[style = "filled" ; label = "Epsilon"] 
-36[style = "filled" ; label = "where"] 
-14[style = "filled" ; label = "where"] 
-15[style = "filled" ; label = "DONDE"] 
-35[style = "filled" ; label = "condiciones"] 
-16[style = "filled" ; label = "condicion"] 
-17[style = "filled" ; label = "id_estudiante"] 
-18[style = "filled" ; label = "condicionP"] 
-19[style = "filled" ; label = ">"] 
-21[style = "filled" ; label = "valorP"] 
-22[style = "filled" ; label = "valor"] 
-20[style = "filled" ; label = "10"] 
-23[style = "filled" ; label = ";"] 
-24[style = "filled" ; label = "condicionesP"] 
-25[style = "filled" ; label = "Y"] 
-26[style = "filled" ; label = "condicion"] 
-27[style = "filled" ; label = "fecha_nacimiento"] 
-28[style = "filled" ; label = "condicionP"] 
-29[style = "filled" ; label = "!="] 
-31[style = "filled" ; label = "valorP"] 
-32[style = "filled" ; label = "valor"] 
-30[style = "filled" ; label = "'21/12/2012'"] 
-33[style = "filled" ; label = ";"] 
-34[style = "filled" ; label = "Epsilon"] 
-37[style = "filled" ; label = "epsilon"] 
-40->38; 
-38->39; 
-39->1; 
+42[style = "filled" ; label = "campos"] 
+40[style = "filled" ; label = "campos"] 
+41[style = "filled" ; label = "campo"] 
+3[style = "filled" ; label = "campo"] 
+4[style = "filled" ; label = "zona"] 
+5[style = "filled" ; label = "campoP"] 
+6[style = "filled" ; label = "."] 
+7[style = "filled" ; label = "campoB"] 
+8[style = "filled" ; label = "nombre"] 
+12[style = "filled" ; label = "campoBprima"] 
+9[style = "filled" ; label = "como"] 
+10[style = "filled" ; label = "COMO"] 
+11[style = "filled" ; label = "zona"] 
+13[style = "filled" ; label = "camposP"] 
+14[style = "filled" ; label = ","] 
+39[style = "filled" ; label = "campo"] 
+15[style = "filled" ; label = "campo"] 
+16[style = "filled" ; label = "municipio"] 
+17[style = "filled" ; label = "campoP"] 
+18[style = "filled" ; label = "."] 
+19[style = "filled" ; label = "campoB"] 
+20[style = "filled" ; label = "nombre"] 
+24[style = "filled" ; label = "campoBprima"] 
+21[style = "filled" ; label = "como"] 
+22[style = "filled" ; label = "COMO"] 
+23[style = "filled" ; label = "municipio"] 
+25[style = "filled" ; label = "camposP"] 
+26[style = "filled" ; label = ","] 
+38[style = "filled" ; label = "campo"] 
+27[style = "filled" ; label = "campo"] 
+28[style = "filled" ; label = "departamento"] 
+29[style = "filled" ; label = "campoP"] 
+30[style = "filled" ; label = "."] 
+31[style = "filled" ; label = "campoB"] 
+32[style = "filled" ; label = "nombre"] 
+36[style = "filled" ; label = "campoBprima"] 
+33[style = "filled" ; label = "como"] 
+34[style = "filled" ; label = "COMO"] 
+35[style = "filled" ; label = "departamento"] 
+37[style = "filled" ; label = "Epsilon"] 
+43[style = "filled" ; label = "DE"] 
+54[style = "filled" ; label = "tablas"] 
+44[style = "filled" ; label = "tablas"] 
+45[style = "filled" ; label = "zona"] 
+53[style = "filled" ; label = "tablasP"] 
+46[style = "filled" ; label = "tablasP"] 
+47[style = "filled" ; label = ","] 
+48[style = "filled" ; label = "municipio"] 
+49[style = "filled" ; label = "tablasP"] 
+50[style = "filled" ; label = ","] 
+51[style = "filled" ; label = "departamento"] 
+52[style = "filled" ; label = "Epsilon"] 
+87[style = "filled" ; label = "where"] 
+55[style = "filled" ; label = "where"] 
+56[style = "filled" ; label = "DONDE"] 
+86[style = "filled" ; label = "condiciones"] 
+57[style = "filled" ; label = "condicion"] 
+58[style = "filled" ; label = "zona"] 
+59[style = "filled" ; label = "condicionP"] 
+60[style = "filled" ; label = "."] 
+61[style = "filled" ; label = "id_municipio"] 
+68[style = "filled" ; label = "valorP"] 
+62[style = "filled" ; label = "="] 
+67[style = "filled" ; label = "simbolo"] 
+63[style = "filled" ; label = "valorP"] 
+64[style = "filled" ; label = "municipio"] 
+65[style = "filled" ; label = "."] 
+66[style = "filled" ; label = "id_municipio"] 
+69[style = "filled" ; label = ";"] 
+70[style = "filled" ; label = "condicionesP"] 
+71[style = "filled" ; label = "Y"] 
+72[style = "filled" ; label = "condicion"] 
+73[style = "filled" ; label = "municipio"] 
+74[style = "filled" ; label = "condicionP"] 
+75[style = "filled" ; label = "."] 
+76[style = "filled" ; label = "id_departamento"] 
+83[style = "filled" ; label = "valorP"] 
+77[style = "filled" ; label = "="] 
+82[style = "filled" ; label = "simbolo"] 
+78[style = "filled" ; label = "valorP"] 
+79[style = "filled" ; label = "departamento"] 
+80[style = "filled" ; label = "."] 
+81[style = "filled" ; label = "id_departamento"] 
+84[style = "filled" ; label = ";"] 
+85[style = "filled" ; label = "Epsilon"] 
+574[style = "filled" ; label = "sentenciasP"] 
+575[style = "filled" ; label = "sentencia"] 
+88[style = "filled" ; label = "create"] 
+89[style = "filled" ; label = "CREAR"] 
+90[style = "filled" ; label = "TABLA"] 
+91[style = "filled" ; label = "departamento"] 
+92[style = "filled" ; label = "("] 
+104[style = "filled" ; label = "parametros"] 
+93[style = "filled" ; label = "parametro"] 
+94[style = "filled" ; label = "id_departamento"] 
+96[style = "filled" ; label = "Tipo"] 
+95[style = "filled" ; label = "ENTERO"] 
+97[style = "filled" ; label = "parametrosP"] 
+98[style = "filled" ; label = ","] 
+99[style = "filled" ; label = "parametro"] 
+100[style = "filled" ; label = "nombre"] 
+102[style = "filled" ; label = "Tipo"] 
+101[style = "filled" ; label = "CADENA"] 
+103[style = "filled" ; label = "epsilon"] 
+105[style = "filled" ; label = ")"] 
+106[style = "filled" ; label = ";"] 
+572[style = "filled" ; label = "sentenciasP"] 
+573[style = "filled" ; label = "sentencia"] 
+107[style = "filled" ; label = "insert"] 
+108[style = "filled" ; label = "INSERTAR"] 
+109[style = "filled" ; label = "EN"] 
+110[style = "filled" ; label = "departamento"] 
+111[style = "filled" ; label = "VALORES"] 
+112[style = "filled" ; label = "("] 
+119[style = "filled" ; label = "valores"] 
+120[style = "filled" ; label = "valor"] 
+113[style = "filled" ; label = "0"] 
+114[style = "filled" ; label = "valoresP"] 
+116[style = "filled" ; label = ","] 
+115[style = "filled" ; label = "valor"] 
+117[style = "filled" ; label = "alta verapaz"] 
+118[style = "filled" ; label = "epsilon"] 
+121[style = "filled" ; label = ")"] 
+122[style = "filled" ; label = ";"] 
+570[style = "filled" ; label = "sentenciasP"] 
+571[style = "filled" ; label = "sentencia"] 
+123[style = "filled" ; label = "insert"] 
+124[style = "filled" ; label = "INSERTAR"] 
+125[style = "filled" ; label = "EN"] 
+126[style = "filled" ; label = "departamento"] 
+127[style = "filled" ; label = "VALORES"] 
+128[style = "filled" ; label = "("] 
+135[style = "filled" ; label = "valores"] 
+136[style = "filled" ; label = "valor"] 
+129[style = "filled" ; label = "1"] 
+130[style = "filled" ; label = "valoresP"] 
+132[style = "filled" ; label = ","] 
+131[style = "filled" ; label = "valor"] 
+133[style = "filled" ; label = "baja verapaz"] 
+134[style = "filled" ; label = "epsilon"] 
+137[style = "filled" ; label = ")"] 
+138[style = "filled" ; label = ";"] 
+568[style = "filled" ; label = "sentenciasP"] 
+569[style = "filled" ; label = "sentencia"] 
+139[style = "filled" ; label = "insert"] 
+140[style = "filled" ; label = "INSERTAR"] 
+141[style = "filled" ; label = "EN"] 
+142[style = "filled" ; label = "departamento"] 
+143[style = "filled" ; label = "VALORES"] 
+144[style = "filled" ; label = "("] 
+151[style = "filled" ; label = "valores"] 
+152[style = "filled" ; label = "valor"] 
+145[style = "filled" ; label = "2"] 
+146[style = "filled" ; label = "valoresP"] 
+148[style = "filled" ; label = ","] 
+147[style = "filled" ; label = "valor"] 
+149[style = "filled" ; label = "chimaltenango"] 
+150[style = "filled" ; label = "epsilon"] 
+153[style = "filled" ; label = ")"] 
+154[style = "filled" ; label = ";"] 
+566[style = "filled" ; label = "sentenciasP"] 
+567[style = "filled" ; label = "sentencia"] 
+155[style = "filled" ; label = "insert"] 
+156[style = "filled" ; label = "INSERTAR"] 
+157[style = "filled" ; label = "EN"] 
+158[style = "filled" ; label = "departamento"] 
+159[style = "filled" ; label = "VALORES"] 
+160[style = "filled" ; label = "("] 
+167[style = "filled" ; label = "valores"] 
+168[style = "filled" ; label = "valor"] 
+161[style = "filled" ; label = "3"] 
+162[style = "filled" ; label = "valoresP"] 
+164[style = "filled" ; label = ","] 
+163[style = "filled" ; label = "valor"] 
+165[style = "filled" ; label = "chiquimula"] 
+166[style = "filled" ; label = "epsilon"] 
+169[style = "filled" ; label = ")"] 
+170[style = "filled" ; label = ";"] 
+564[style = "filled" ; label = "sentenciasP"] 
+565[style = "filled" ; label = "sentencia"] 
+171[style = "filled" ; label = "insert"] 
+172[style = "filled" ; label = "INSERTAR"] 
+173[style = "filled" ; label = "EN"] 
+174[style = "filled" ; label = "departamento"] 
+175[style = "filled" ; label = "VALORES"] 
+176[style = "filled" ; label = "("] 
+183[style = "filled" ; label = "valores"] 
+184[style = "filled" ; label = "valor"] 
+177[style = "filled" ; label = "4"] 
+178[style = "filled" ; label = "valoresP"] 
+180[style = "filled" ; label = ","] 
+179[style = "filled" ; label = "valor"] 
+181[style = "filled" ; label = "petén"] 
+182[style = "filled" ; label = "epsilon"] 
+185[style = "filled" ; label = ")"] 
+186[style = "filled" ; label = ";"] 
+562[style = "filled" ; label = "sentenciasP"] 
+563[style = "filled" ; label = "sentencia"] 
+187[style = "filled" ; label = "insert"] 
+188[style = "filled" ; label = "INSERTAR"] 
+189[style = "filled" ; label = "EN"] 
+190[style = "filled" ; label = "departamento"] 
+191[style = "filled" ; label = "VALORES"] 
+192[style = "filled" ; label = "("] 
+199[style = "filled" ; label = "valores"] 
+200[style = "filled" ; label = "valor"] 
+193[style = "filled" ; label = "5"] 
+194[style = "filled" ; label = "valoresP"] 
+196[style = "filled" ; label = ","] 
+195[style = "filled" ; label = "valor"] 
+197[style = "filled" ; label = "el progreso"] 
+198[style = "filled" ; label = "epsilon"] 
+201[style = "filled" ; label = ")"] 
+202[style = "filled" ; label = ";"] 
+560[style = "filled" ; label = "sentenciasP"] 
+561[style = "filled" ; label = "sentencia"] 
+203[style = "filled" ; label = "insert"] 
+204[style = "filled" ; label = "INSERTAR"] 
+205[style = "filled" ; label = "EN"] 
+206[style = "filled" ; label = "departamento"] 
+207[style = "filled" ; label = "VALORES"] 
+208[style = "filled" ; label = "("] 
+215[style = "filled" ; label = "valores"] 
+216[style = "filled" ; label = "valor"] 
+209[style = "filled" ; label = "6"] 
+210[style = "filled" ; label = "valoresP"] 
+212[style = "filled" ; label = ","] 
+211[style = "filled" ; label = "valor"] 
+213[style = "filled" ; label = "quiché"] 
+214[style = "filled" ; label = "epsilon"] 
+217[style = "filled" ; label = ")"] 
+218[style = "filled" ; label = ";"] 
+558[style = "filled" ; label = "sentenciasP"] 
+559[style = "filled" ; label = "sentencia"] 
+219[style = "filled" ; label = "create"] 
+220[style = "filled" ; label = "CREAR"] 
+221[style = "filled" ; label = "TABLA"] 
+222[style = "filled" ; label = "municipio"] 
+223[style = "filled" ; label = "("] 
+241[style = "filled" ; label = "parametros"] 
+224[style = "filled" ; label = "parametro"] 
+225[style = "filled" ; label = "id_municipio"] 
+227[style = "filled" ; label = "Tipo"] 
+226[style = "filled" ; label = "ENTERO"] 
+228[style = "filled" ; label = "parametrosP"] 
+229[style = "filled" ; label = ","] 
+230[style = "filled" ; label = "parametro"] 
+231[style = "filled" ; label = "nombre"] 
+233[style = "filled" ; label = "Tipo"] 
+232[style = "filled" ; label = "CADENA"] 
+234[style = "filled" ; label = "parametrosP"] 
+235[style = "filled" ; label = ","] 
+236[style = "filled" ; label = "parametro"] 
+237[style = "filled" ; label = "id_departamento"] 
+239[style = "filled" ; label = "Tipo"] 
+238[style = "filled" ; label = "ENTERO"] 
+240[style = "filled" ; label = "epsilon"] 
+242[style = "filled" ; label = ")"] 
+243[style = "filled" ; label = ";"] 
+556[style = "filled" ; label = "sentenciasP"] 
+557[style = "filled" ; label = "sentencia"] 
+244[style = "filled" ; label = "insert"] 
+245[style = "filled" ; label = "INSERTAR"] 
+246[style = "filled" ; label = "EN"] 
+247[style = "filled" ; label = "municipio"] 
+248[style = "filled" ; label = "VALORES"] 
+249[style = "filled" ; label = "("] 
+260[style = "filled" ; label = "valores"] 
+261[style = "filled" ; label = "valor"] 
+250[style = "filled" ; label = "0"] 
+251[style = "filled" ; label = "valoresP"] 
+253[style = "filled" ; label = ","] 
+252[style = "filled" ; label = "valor"] 
+254[style = "filled" ; label = "coban"] 
+255[style = "filled" ; label = "valoresP"] 
+257[style = "filled" ; label = ","] 
+256[style = "filled" ; label = "valor"] 
+258[style = "filled" ; label = "1"] 
+259[style = "filled" ; label = "epsilon"] 
+262[style = "filled" ; label = ")"] 
+263[style = "filled" ; label = ";"] 
+554[style = "filled" ; label = "sentenciasP"] 
+555[style = "filled" ; label = "sentencia"] 
+264[style = "filled" ; label = "insert"] 
+265[style = "filled" ; label = "INSERTAR"] 
+266[style = "filled" ; label = "EN"] 
+267[style = "filled" ; label = "municipio"] 
+268[style = "filled" ; label = "VALORES"] 
+269[style = "filled" ; label = "("] 
+280[style = "filled" ; label = "valores"] 
+281[style = "filled" ; label = "valor"] 
+270[style = "filled" ; label = "1"] 
+271[style = "filled" ; label = "valoresP"] 
+273[style = "filled" ; label = ","] 
+272[style = "filled" ; label = "valor"] 
+274[style = "filled" ; label = "san pedro carchá"] 
+275[style = "filled" ; label = "valoresP"] 
+277[style = "filled" ; label = ","] 
+276[style = "filled" ; label = "valor"] 
+278[style = "filled" ; label = "1"] 
+279[style = "filled" ; label = "epsilon"] 
+282[style = "filled" ; label = ")"] 
+283[style = "filled" ; label = ";"] 
+552[style = "filled" ; label = "sentenciasP"] 
+553[style = "filled" ; label = "sentencia"] 
+284[style = "filled" ; label = "insert"] 
+285[style = "filled" ; label = "INSERTAR"] 
+286[style = "filled" ; label = "EN"] 
+287[style = "filled" ; label = "municipio"] 
+288[style = "filled" ; label = "VALORES"] 
+289[style = "filled" ; label = "("] 
+300[style = "filled" ; label = "valores"] 
+301[style = "filled" ; label = "valor"] 
+290[style = "filled" ; label = "2"] 
+291[style = "filled" ; label = "valoresP"] 
+293[style = "filled" ; label = ","] 
+292[style = "filled" ; label = "valor"] 
+294[style = "filled" ; label = "cubulcu"] 
+295[style = "filled" ; label = "valoresP"] 
+297[style = "filled" ; label = ","] 
+296[style = "filled" ; label = "valor"] 
+298[style = "filled" ; label = "2"] 
+299[style = "filled" ; label = "epsilon"] 
+302[style = "filled" ; label = ")"] 
+303[style = "filled" ; label = ";"] 
+550[style = "filled" ; label = "sentenciasP"] 
+551[style = "filled" ; label = "sentencia"] 
+304[style = "filled" ; label = "insert"] 
+305[style = "filled" ; label = "INSERTAR"] 
+306[style = "filled" ; label = "EN"] 
+307[style = "filled" ; label = "municipio"] 
+308[style = "filled" ; label = "VALORES"] 
+309[style = "filled" ; label = "("] 
+320[style = "filled" ; label = "valores"] 
+321[style = "filled" ; label = "valor"] 
+310[style = "filled" ; label = "3"] 
+311[style = "filled" ; label = "valoresP"] 
+313[style = "filled" ; label = ","] 
+312[style = "filled" ; label = "valor"] 
+314[style = "filled" ; label = "salamá"] 
+315[style = "filled" ; label = "valoresP"] 
+317[style = "filled" ; label = ","] 
+316[style = "filled" ; label = "valor"] 
+318[style = "filled" ; label = "2"] 
+319[style = "filled" ; label = "epsilon"] 
+322[style = "filled" ; label = ")"] 
+323[style = "filled" ; label = ";"] 
+548[style = "filled" ; label = "sentenciasP"] 
+549[style = "filled" ; label = "sentencia"] 
+324[style = "filled" ; label = "insert"] 
+325[style = "filled" ; label = "INSERTAR"] 
+326[style = "filled" ; label = "EN"] 
+327[style = "filled" ; label = "municipio"] 
+328[style = "filled" ; label = "VALORES"] 
+329[style = "filled" ; label = "("] 
+340[style = "filled" ; label = "valores"] 
+341[style = "filled" ; label = "valor"] 
+330[style = "filled" ; label = "4"] 
+331[style = "filled" ; label = "valoresP"] 
+333[style = "filled" ; label = ","] 
+332[style = "filled" ; label = "valor"] 
+334[style = "filled" ; label = "chimaltenango"] 
+335[style = "filled" ; label = "valoresP"] 
+337[style = "filled" ; label = ","] 
+336[style = "filled" ; label = "valor"] 
+338[style = "filled" ; label = "3"] 
+339[style = "filled" ; label = "epsilon"] 
+342[style = "filled" ; label = ")"] 
+343[style = "filled" ; label = ";"] 
+546[style = "filled" ; label = "sentenciasP"] 
+547[style = "filled" ; label = "sentencia"] 
+344[style = "filled" ; label = "insert"] 
+345[style = "filled" ; label = "INSERTAR"] 
+346[style = "filled" ; label = "EN"] 
+347[style = "filled" ; label = "municipio"] 
+348[style = "filled" ; label = "VALORES"] 
+349[style = "filled" ; label = "("] 
+360[style = "filled" ; label = "valores"] 
+361[style = "filled" ; label = "valor"] 
+350[style = "filled" ; label = "5"] 
+351[style = "filled" ; label = "valoresP"] 
+353[style = "filled" ; label = ","] 
+352[style = "filled" ; label = "valor"] 
+354[style = "filled" ; label = "acatenango"] 
+355[style = "filled" ; label = "valoresP"] 
+357[style = "filled" ; label = ","] 
+356[style = "filled" ; label = "valor"] 
+358[style = "filled" ; label = "3"] 
+359[style = "filled" ; label = "epsilon"] 
+362[style = "filled" ; label = ")"] 
+363[style = "filled" ; label = ";"] 
+544[style = "filled" ; label = "sentenciasP"] 
+545[style = "filled" ; label = "sentencia"] 
+364[style = "filled" ; label = "insert"] 
+365[style = "filled" ; label = "INSERTAR"] 
+366[style = "filled" ; label = "EN"] 
+367[style = "filled" ; label = "municipio"] 
+368[style = "filled" ; label = "VALORES"] 
+369[style = "filled" ; label = "("] 
+380[style = "filled" ; label = "valores"] 
+381[style = "filled" ; label = "valor"] 
+370[style = "filled" ; label = "6"] 
+371[style = "filled" ; label = "valoresP"] 
+373[style = "filled" ; label = ","] 
+372[style = "filled" ; label = "valor"] 
+374[style = "filled" ; label = "chiquimula"] 
+375[style = "filled" ; label = "valoresP"] 
+377[style = "filled" ; label = ","] 
+376[style = "filled" ; label = "valor"] 
+378[style = "filled" ; label = "4"] 
+379[style = "filled" ; label = "epsilon"] 
+382[style = "filled" ; label = ")"] 
+383[style = "filled" ; label = ";"] 
+542[style = "filled" ; label = "sentenciasP"] 
+543[style = "filled" ; label = "sentencia"] 
+384[style = "filled" ; label = "create"] 
+385[style = "filled" ; label = "CREAR"] 
+386[style = "filled" ; label = "TABLA"] 
+387[style = "filled" ; label = "zona"] 
+388[style = "filled" ; label = "("] 
+406[style = "filled" ; label = "parametros"] 
+389[style = "filled" ; label = "parametro"] 
+390[style = "filled" ; label = "id_zona"] 
+392[style = "filled" ; label = "Tipo"] 
+391[style = "filled" ; label = "ENTERO"] 
+393[style = "filled" ; label = "parametrosP"] 
+394[style = "filled" ; label = ","] 
+395[style = "filled" ; label = "parametro"] 
+396[style = "filled" ; label = "nombre"] 
+398[style = "filled" ; label = "Tipo"] 
+397[style = "filled" ; label = "CADENA"] 
+399[style = "filled" ; label = "parametrosP"] 
+400[style = "filled" ; label = ","] 
+401[style = "filled" ; label = "parametro"] 
+402[style = "filled" ; label = "id_municipio"] 
+404[style = "filled" ; label = "Tipo"] 
+403[style = "filled" ; label = "ENTERO"] 
+405[style = "filled" ; label = "epsilon"] 
+407[style = "filled" ; label = ")"] 
+408[style = "filled" ; label = ";"] 
+540[style = "filled" ; label = "sentenciasP"] 
+541[style = "filled" ; label = "sentencia"] 
+409[style = "filled" ; label = "insert"] 
+410[style = "filled" ; label = "INSERTAR"] 
+411[style = "filled" ; label = "EN"] 
+412[style = "filled" ; label = "zona"] 
+413[style = "filled" ; label = "VALORES"] 
+414[style = "filled" ; label = "("] 
+425[style = "filled" ; label = "valores"] 
+426[style = "filled" ; label = "valor"] 
+415[style = "filled" ; label = "0"] 
+416[style = "filled" ; label = "valoresP"] 
+418[style = "filled" ; label = ","] 
+417[style = "filled" ; label = "valor"] 
+419[style = "filled" ; label = "zona 1"] 
+420[style = "filled" ; label = "valoresP"] 
+422[style = "filled" ; label = ","] 
+421[style = "filled" ; label = "valor"] 
+423[style = "filled" ; label = "1"] 
+424[style = "filled" ; label = "epsilon"] 
+427[style = "filled" ; label = ")"] 
+428[style = "filled" ; label = ";"] 
+538[style = "filled" ; label = "sentenciasP"] 
+539[style = "filled" ; label = "sentencia"] 
+429[style = "filled" ; label = "insert"] 
+430[style = "filled" ; label = "INSERTAR"] 
+431[style = "filled" ; label = "EN"] 
+432[style = "filled" ; label = "zona"] 
+433[style = "filled" ; label = "VALORES"] 
+434[style = "filled" ; label = "("] 
+445[style = "filled" ; label = "valores"] 
+446[style = "filled" ; label = "valor"] 
+435[style = "filled" ; label = "1"] 
+436[style = "filled" ; label = "valoresP"] 
+438[style = "filled" ; label = ","] 
+437[style = "filled" ; label = "valor"] 
+439[style = "filled" ; label = "zona 1"] 
+440[style = "filled" ; label = "valoresP"] 
+442[style = "filled" ; label = ","] 
+441[style = "filled" ; label = "valor"] 
+443[style = "filled" ; label = "2"] 
+444[style = "filled" ; label = "epsilon"] 
+447[style = "filled" ; label = ")"] 
+448[style = "filled" ; label = ";"] 
+536[style = "filled" ; label = "sentenciasP"] 
+537[style = "filled" ; label = "sentencia"] 
+449[style = "filled" ; label = "insert"] 
+450[style = "filled" ; label = "INSERTAR"] 
+451[style = "filled" ; label = "EN"] 
+452[style = "filled" ; label = "zona"] 
+453[style = "filled" ; label = "VALORES"] 
+454[style = "filled" ; label = "("] 
+465[style = "filled" ; label = "valores"] 
+466[style = "filled" ; label = "valor"] 
+455[style = "filled" ; label = "2"] 
+456[style = "filled" ; label = "valoresP"] 
+458[style = "filled" ; label = ","] 
+457[style = "filled" ; label = "valor"] 
+459[style = "filled" ; label = "zona 1"] 
+460[style = "filled" ; label = "valoresP"] 
+462[style = "filled" ; label = ","] 
+461[style = "filled" ; label = "valor"] 
+463[style = "filled" ; label = "3"] 
+464[style = "filled" ; label = "epsilon"] 
+467[style = "filled" ; label = ")"] 
+468[style = "filled" ; label = ";"] 
+534[style = "filled" ; label = "sentenciasP"] 
+535[style = "filled" ; label = "sentencia"] 
+469[style = "filled" ; label = "insert"] 
+470[style = "filled" ; label = "INSERTAR"] 
+471[style = "filled" ; label = "EN"] 
+472[style = "filled" ; label = "zona"] 
+473[style = "filled" ; label = "VALORES"] 
+474[style = "filled" ; label = "("] 
+485[style = "filled" ; label = "valores"] 
+486[style = "filled" ; label = "valor"] 
+475[style = "filled" ; label = "3"] 
+476[style = "filled" ; label = "valoresP"] 
+478[style = "filled" ; label = ","] 
+477[style = "filled" ; label = "valor"] 
+479[style = "filled" ; label = "zona 1"] 
+480[style = "filled" ; label = "valoresP"] 
+482[style = "filled" ; label = ","] 
+481[style = "filled" ; label = "valor"] 
+483[style = "filled" ; label = "4"] 
+484[style = "filled" ; label = "epsilon"] 
+487[style = "filled" ; label = ")"] 
+488[style = "filled" ; label = ";"] 
+532[style = "filled" ; label = "sentenciasP"] 
+533[style = "filled" ; label = "sentencia"] 
+489[style = "filled" ; label = "insert"] 
+490[style = "filled" ; label = "INSERTAR"] 
+491[style = "filled" ; label = "EN"] 
+492[style = "filled" ; label = "zona"] 
+493[style = "filled" ; label = "VALORES"] 
+494[style = "filled" ; label = "("] 
+505[style = "filled" ; label = "valores"] 
+506[style = "filled" ; label = "valor"] 
+495[style = "filled" ; label = "4"] 
+496[style = "filled" ; label = "valoresP"] 
+498[style = "filled" ; label = ","] 
+497[style = "filled" ; label = "valor"] 
+499[style = "filled" ; label = "zona 1"] 
+500[style = "filled" ; label = "valoresP"] 
+502[style = "filled" ; label = ","] 
+501[style = "filled" ; label = "valor"] 
+503[style = "filled" ; label = "5"] 
+504[style = "filled" ; label = "epsilon"] 
+507[style = "filled" ; label = ")"] 
+508[style = "filled" ; label = ";"] 
+530[style = "filled" ; label = "sentenciasP"] 
+531[style = "filled" ; label = "sentencia"] 
+509[style = "filled" ; label = "insert"] 
+510[style = "filled" ; label = "INSERTAR"] 
+511[style = "filled" ; label = "EN"] 
+512[style = "filled" ; label = "zona"] 
+513[style = "filled" ; label = "VALORES"] 
+514[style = "filled" ; label = "("] 
+525[style = "filled" ; label = "valores"] 
+526[style = "filled" ; label = "valor"] 
+515[style = "filled" ; label = "5"] 
+516[style = "filled" ; label = "valoresP"] 
+518[style = "filled" ; label = ","] 
+517[style = "filled" ; label = "valor"] 
+519[style = "filled" ; label = "zona 1"] 
+520[style = "filled" ; label = "valoresP"] 
+522[style = "filled" ; label = ","] 
+521[style = "filled" ; label = "valor"] 
+523[style = "filled" ; label = "6"] 
+524[style = "filled" ; label = "epsilon"] 
+527[style = "filled" ; label = ")"] 
+528[style = "filled" ; label = ";"] 
+529[style = "filled" ; label = "epsilon"] 
+578->576; 
+576->577; 
+577->1; 
 1->2; 
-1->7; 
-7->5; 
+1->42; 
+42->40; 
+40->41; 
+41->3; 
+3->4; 
+3->5; 
 5->6; 
-6->3; 
-5->4; 
-1->8; 
-1->13; 
-13->9; 
+5->7; 
+7->8; 
+7->12; 
+12->9; 
 9->10; 
-9->12; 
-12->11; 
-1->36; 
-36->14; 
-14->15; 
-14->35; 
-35->16; 
-16->17; 
-16->18; 
-18->19; 
-18->21; 
+9->11; 
+40->13; 
+13->14; 
+13->39; 
+39->15; 
+15->16; 
+15->17; 
+17->18; 
+17->19; 
+19->20; 
+19->24; 
+24->21; 
 21->22; 
-22->20; 
-18->23; 
-35->24; 
-24->25; 
-24->26; 
-26->27; 
-26->28; 
-28->29; 
-28->31; 
+21->23; 
+13->25; 
+25->26; 
+25->38; 
+38->27; 
+27->28; 
+27->29; 
+29->30; 
+29->31; 
 31->32; 
-32->30; 
-28->33; 
-24->34; 
-38->37; 
+31->36; 
+36->33; 
+33->34; 
+33->35; 
+25->37; 
+1->43; 
+1->54; 
+54->44; 
+44->45; 
+44->53; 
+53->46; 
+46->47; 
+46->48; 
+46->49; 
+49->50; 
+49->51; 
+49->52; 
+1->87; 
+87->55; 
+55->56; 
+55->86; 
+86->57; 
+57->58; 
+57->59; 
+59->60; 
+59->61; 
+59->68; 
+68->62; 
+59->67; 
+67->63; 
+63->64; 
+63->65; 
+63->66; 
+59->69; 
+86->70; 
+70->71; 
+70->72; 
+72->73; 
+72->74; 
+74->75; 
+74->76; 
+74->83; 
+83->77; 
+74->82; 
+82->78; 
+78->79; 
+78->80; 
+78->81; 
+74->84; 
+70->85; 
+576->574; 
+574->575; 
+575->88; 
+88->89; 
+88->90; 
+88->91; 
+88->92; 
+88->104; 
+104->93; 
+93->94; 
+93->96; 
+96->95; 
+104->97; 
+97->98; 
+97->99; 
+99->100; 
+99->102; 
+102->101; 
+97->103; 
+88->105; 
+88->106; 
+574->572; 
+572->573; 
+573->107; 
+107->108; 
+107->109; 
+107->110; 
+107->111; 
+107->112; 
+107->119; 
+119->120; 
+120->113; 
+119->114; 
+114->116; 
+114->115; 
+115->117; 
+114->118; 
+107->121; 
+107->122; 
+572->570; 
+570->571; 
+571->123; 
+123->124; 
+123->125; 
+123->126; 
+123->127; 
+123->128; 
+123->135; 
+135->136; 
+136->129; 
+135->130; 
+130->132; 
+130->131; 
+131->133; 
+130->134; 
+123->137; 
+123->138; 
+570->568; 
+568->569; 
+569->139; 
+139->140; 
+139->141; 
+139->142; 
+139->143; 
+139->144; 
+139->151; 
+151->152; 
+152->145; 
+151->146; 
+146->148; 
+146->147; 
+147->149; 
+146->150; 
+139->153; 
+139->154; 
+568->566; 
+566->567; 
+567->155; 
+155->156; 
+155->157; 
+155->158; 
+155->159; 
+155->160; 
+155->167; 
+167->168; 
+168->161; 
+167->162; 
+162->164; 
+162->163; 
+163->165; 
+162->166; 
+155->169; 
+155->170; 
+566->564; 
+564->565; 
+565->171; 
+171->172; 
+171->173; 
+171->174; 
+171->175; 
+171->176; 
+171->183; 
+183->184; 
+184->177; 
+183->178; 
+178->180; 
+178->179; 
+179->181; 
+178->182; 
+171->185; 
+171->186; 
+564->562; 
+562->563; 
+563->187; 
+187->188; 
+187->189; 
+187->190; 
+187->191; 
+187->192; 
+187->199; 
+199->200; 
+200->193; 
+199->194; 
+194->196; 
+194->195; 
+195->197; 
+194->198; 
+187->201; 
+187->202; 
+562->560; 
+560->561; 
+561->203; 
+203->204; 
+203->205; 
+203->206; 
+203->207; 
+203->208; 
+203->215; 
+215->216; 
+216->209; 
+215->210; 
+210->212; 
+210->211; 
+211->213; 
+210->214; 
+203->217; 
+203->218; 
+560->558; 
+558->559; 
+559->219; 
+219->220; 
+219->221; 
+219->222; 
+219->223; 
+219->241; 
+241->224; 
+224->225; 
+224->227; 
+227->226; 
+241->228; 
+228->229; 
+228->230; 
+230->231; 
+230->233; 
+233->232; 
+228->234; 
+234->235; 
+234->236; 
+236->237; 
+236->239; 
+239->238; 
+234->240; 
+219->242; 
+219->243; 
+558->556; 
+556->557; 
+557->244; 
+244->245; 
+244->246; 
+244->247; 
+244->248; 
+244->249; 
+244->260; 
+260->261; 
+261->250; 
+260->251; 
+251->253; 
+251->252; 
+252->254; 
+251->255; 
+255->257; 
+255->256; 
+256->258; 
+255->259; 
+244->262; 
+244->263; 
+556->554; 
+554->555; 
+555->264; 
+264->265; 
+264->266; 
+264->267; 
+264->268; 
+264->269; 
+264->280; 
+280->281; 
+281->270; 
+280->271; 
+271->273; 
+271->272; 
+272->274; 
+271->275; 
+275->277; 
+275->276; 
+276->278; 
+275->279; 
+264->282; 
+264->283; 
+554->552; 
+552->553; 
+553->284; 
+284->285; 
+284->286; 
+284->287; 
+284->288; 
+284->289; 
+284->300; 
+300->301; 
+301->290; 
+300->291; 
+291->293; 
+291->292; 
+292->294; 
+291->295; 
+295->297; 
+295->296; 
+296->298; 
+295->299; 
+284->302; 
+284->303; 
+552->550; 
+550->551; 
+551->304; 
+304->305; 
+304->306; 
+304->307; 
+304->308; 
+304->309; 
+304->320; 
+320->321; 
+321->310; 
+320->311; 
+311->313; 
+311->312; 
+312->314; 
+311->315; 
+315->317; 
+315->316; 
+316->318; 
+315->319; 
+304->322; 
+304->323; 
+550->548; 
+548->549; 
+549->324; 
+324->325; 
+324->326; 
+324->327; 
+324->328; 
+324->329; 
+324->340; 
+340->341; 
+341->330; 
+340->331; 
+331->333; 
+331->332; 
+332->334; 
+331->335; 
+335->337; 
+335->336; 
+336->338; 
+335->339; 
+324->342; 
+324->343; 
+548->546; 
+546->547; 
+547->344; 
+344->345; 
+344->346; 
+344->347; 
+344->348; 
+344->349; 
+344->360; 
+360->361; 
+361->350; 
+360->351; 
+351->353; 
+351->352; 
+352->354; 
+351->355; 
+355->357; 
+355->356; 
+356->358; 
+355->359; 
+344->362; 
+344->363; 
+546->544; 
+544->545; 
+545->364; 
+364->365; 
+364->366; 
+364->367; 
+364->368; 
+364->369; 
+364->380; 
+380->381; 
+381->370; 
+380->371; 
+371->373; 
+371->372; 
+372->374; 
+371->375; 
+375->377; 
+375->376; 
+376->378; 
+375->379; 
+364->382; 
+364->383; 
+544->542; 
+542->543; 
+543->384; 
+384->385; 
+384->386; 
+384->387; 
+384->388; 
+384->406; 
+406->389; 
+389->390; 
+389->392; 
+392->391; 
+406->393; 
+393->394; 
+393->395; 
+395->396; 
+395->398; 
+398->397; 
+393->399; 
+399->400; 
+399->401; 
+401->402; 
+401->404; 
+404->403; 
+399->405; 
+384->407; 
+384->408; 
+542->540; 
+540->541; 
+541->409; 
+409->410; 
+409->411; 
+409->412; 
+409->413; 
+409->414; 
+409->425; 
+425->426; 
+426->415; 
+425->416; 
+416->418; 
+416->417; 
+417->419; 
+416->420; 
+420->422; 
+420->421; 
+421->423; 
+420->424; 
+409->427; 
+409->428; 
+540->538; 
+538->539; 
+539->429; 
+429->430; 
+429->431; 
+429->432; 
+429->433; 
+429->434; 
+429->445; 
+445->446; 
+446->435; 
+445->436; 
+436->438; 
+436->437; 
+437->439; 
+436->440; 
+440->442; 
+440->441; 
+441->443; 
+440->444; 
+429->447; 
+429->448; 
+538->536; 
+536->537; 
+537->449; 
+449->450; 
+449->451; 
+449->452; 
+449->453; 
+449->454; 
+449->465; 
+465->466; 
+466->455; 
+465->456; 
+456->458; 
+456->457; 
+457->459; 
+456->460; 
+460->462; 
+460->461; 
+461->463; 
+460->464; 
+449->467; 
+449->468; 
+536->534; 
+534->535; 
+535->469; 
+469->470; 
+469->471; 
+469->472; 
+469->473; 
+469->474; 
+469->485; 
+485->486; 
+486->475; 
+485->476; 
+476->478; 
+476->477; 
+477->479; 
+476->480; 
+480->482; 
+480->481; 
+481->483; 
+480->484; 
+469->487; 
+469->488; 
+534->532; 
+532->533; 
+533->489; 
+489->490; 
+489->491; 
+489->492; 
+489->493; 
+489->494; 
+489->505; 
+505->506; 
+506->495; 
+505->496; 
+496->498; 
+496->497; 
+497->499; 
+496->500; 
+500->502; 
+500->501; 
+501->503; 
+500->504; 
+489->507; 
+489->508; 
+532->530; 
+530->531; 
+531->509; 
+509->510; 
+509->511; 
+509->512; 
+509->513; 
+509->514; 
+509->525; 
+525->526; 
+526->515; 
+525->516; 
+516->518; 
+516->517; 
+517->519; 
+516->520; 
+520->522; 
+520->521; 
+521->523; 
+520->524; 
+509->527; 
+509->528; 
+530->529; 
 }

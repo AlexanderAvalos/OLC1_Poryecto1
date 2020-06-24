@@ -30,7 +30,19 @@ namespace Proyecto1
 
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Panel.Text = "";
+            analizador.lst_token.Clear();
+            int val = analizador.lst_token.Count();
+            for (int i = 0; i < val-1; i++)
+            {
+                analizador.lst_token.RemoveAt(i);
+            }
+            analizador.lst_tokens.Clear();
+            int val2 = analizador.lst_tokens.Count();
+            for (int i = 0; i < val2 - 1; i++)
+            {
+                analizador.lst_tokens.RemoveAt(i);
+            }
         }
 
 
@@ -76,7 +88,14 @@ namespace Proyecto1
         {
             AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
             sintactico.parser();
-            sintactico.imprimir();
+            try
+            {
+                sintactico.imprimir2();
+            }
+            catch (Exception)
+            {
+
+            }
         }
         private void guardar()
         {
@@ -166,7 +185,7 @@ namespace Proyecto1
 
             analizador_lexico();
             analizador_sintactico();
-
+            
         }
 
         private void mostrarTokenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,6 +225,25 @@ namespace Proyecto1
             {
                 e.Graphics.DrawString((1).ToString(), Panel.Font, Brushes.Cyan, pictureBox1.Width - (e.Graphics.MeasureString((1).ToString(), Panel.Font).Width + 10), altura);
             }
+        }
+
+        private void verTablasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
+            sintactico.parser();
+            sintactico.vertablar();
+        }
+
+        private void mostrarArbolDeDerivacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
+            sintactico.parser();
+            sintactico.imprirarbol();
+        }
+
+        private void cargarTablasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            abrir();
         }
     }
 }

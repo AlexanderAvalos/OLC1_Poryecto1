@@ -12,6 +12,13 @@ namespace Proyecto1.Analizador
         string nombre;
         List<Nodo> childs;
 
+        public Nodo()
+        {
+            this.index = 0;
+            this.Nombre = "";
+            Childs = new List<Nodo>();
+        }
+
         public Nodo(int index, string nombre, List<Nodo> lst )
         {
             this.index = index;

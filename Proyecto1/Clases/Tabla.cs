@@ -17,7 +17,23 @@ namespace Proyecto1.Clases
             this.columnas = new List<Columna>();
             this.Filas = new List<Dictionary<string, object>>();
         }
-        
+        public void agregarcolumna(int index,string llave, string valor) {
+            if (filas.Count > index + 1)
+                filas.ElementAt(index).Add(llave, valor);
+            else
+            {
+                Dictionary<string, object> aux = new Dictionary<string, object>();
+                aux.Add(llave, valor);
+                filas.Add(aux);
+
+
+            }
+                
+            
+        }
+        public void agregarfila() {
+            
+        }
         public string Nombre_tabla { get => nombre_tabla; set => nombre_tabla = value; }
         public List<Dictionary<string, object>> Filas { get => filas; set => filas = value; }
         internal List<Columna> Columnas { get => columnas; set => columnas = value; }

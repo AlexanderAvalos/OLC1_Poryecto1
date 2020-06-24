@@ -137,12 +137,14 @@
             this.cargarTablasToolStripMenuItem.Name = "cargarTablasToolStripMenuItem";
             this.cargarTablasToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.cargarTablasToolStripMenuItem.Text = "Cargar Tablas";
+            this.cargarTablasToolStripMenuItem.Click += new System.EventHandler(this.cargarTablasToolStripMenuItem_Click);
             // 
             // verTablasToolStripMenuItem
             // 
             this.verTablasToolStripMenuItem.Name = "verTablasToolStripMenuItem";
             this.verTablasToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.verTablasToolStripMenuItem.Text = "Ver Tablas";
+            this.verTablasToolStripMenuItem.Click += new System.EventHandler(this.verTablasToolStripMenuItem_Click);
             // 
             // mostrarTokenToolStripMenuItem
             // 
@@ -156,6 +158,7 @@
             this.mostrarArbolDeDerivacionToolStripMenuItem.Name = "mostrarArbolDeDerivacionToolStripMenuItem";
             this.mostrarArbolDeDerivacionToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.mostrarArbolDeDerivacionToolStripMenuItem.Text = "Mostrar Arbol de derivacion";
+            this.mostrarArbolDeDerivacionToolStripMenuItem.Click += new System.EventHandler(this.mostrarArbolDeDerivacionToolStripMenuItem_Click);
             // 
             // mostrarErroresToolStripMenuItem
             // 
