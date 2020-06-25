@@ -20,7 +20,7 @@ namespace Proyecto1.Analizador
         public List<Token> lst_token = new List<Token>();
         public List<Token> lst_tokens = new List<Token>();
         public List<Errores> lst_errores = new List<Errores>();
-        private bool vacio = true;
+        public bool vacio = true;
         private int contador = 1;
         private RichTextBox pan = new RichTextBox();
         public void analizadorlexico(string linea, int fila, RichTextBox panel)

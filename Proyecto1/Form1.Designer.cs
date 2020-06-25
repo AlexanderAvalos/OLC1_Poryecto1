@@ -43,6 +43,7 @@
             this.mostrarTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarArbolDeDerivacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarErroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejecutarTodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualTecnicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,7 +120,8 @@
             this.verTablasToolStripMenuItem,
             this.mostrarTokenToolStripMenuItem,
             this.mostrarArbolDeDerivacionToolStripMenuItem,
-            this.mostrarErroresToolStripMenuItem});
+            this.mostrarErroresToolStripMenuItem,
+            this.ejecutarTodoToolStripMenuItem});
             this.aToolStripMenuItem.Name = "aToolStripMenuItem";
             this.aToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.aToolStripMenuItem.Text = "Herramienta";
@@ -167,6 +169,13 @@
             this.mostrarErroresToolStripMenuItem.Text = "Mostrar Errores";
             this.mostrarErroresToolStripMenuItem.Click += new System.EventHandler(this.mostrarErroresToolStripMenuItem_Click);
             // 
+            // ejecutarTodoToolStripMenuItem
+            // 
+            this.ejecutarTodoToolStripMenuItem.Name = "ejecutarTodoToolStripMenuItem";
+            this.ejecutarTodoToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.ejecutarTodoToolStripMenuItem.Text = "ejecutar todo";
+            this.ejecutarTodoToolStripMenuItem.Click += new System.EventHandler(this.ejecutarTodoToolStripMenuItem_Click);
+            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -180,19 +189,21 @@
             // manualDeUsuarioToolStripMenuItem
             // 
             this.manualDeUsuarioToolStripMenuItem.Name = "manualDeUsuarioToolStripMenuItem";
-            this.manualDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.manualDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.manualDeUsuarioToolStripMenuItem.Text = "Manual de usuario";
+            this.manualDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.manualDeUsuarioToolStripMenuItem_Click);
             // 
             // manualTecnicoToolStripMenuItem
             // 
             this.manualTecnicoToolStripMenuItem.Name = "manualTecnicoToolStripMenuItem";
-            this.manualTecnicoToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.manualTecnicoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.manualTecnicoToolStripMenuItem.Text = "Manual Tecnico";
+            this.manualTecnicoToolStripMenuItem.Click += new System.EventHandler(this.manualTecnicoToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca De";
             // 
             // Panel
@@ -261,6 +272,7 @@
         private System.Windows.Forms.RichTextBox Panel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer Controlador;
+        private System.Windows.Forms.ToolStripMenuItem ejecutarTodoToolStripMenuItem;
     }
 }
 

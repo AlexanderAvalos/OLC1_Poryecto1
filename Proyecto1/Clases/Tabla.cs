@@ -25,14 +25,7 @@ namespace Proyecto1.Clases
                 Dictionary<string, object> aux = new Dictionary<string, object>();
                 aux.Add(llave, valor);
                 filas.Add(aux);
-
-
             }
-                
-            
-        }
-        public void agregarfila() {
-            
         }
         public string Nombre_tabla { get => nombre_tabla; set => nombre_tabla = value; }
         public List<Dictionary<string, object>> Filas { get => filas; set => filas = value; }

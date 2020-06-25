@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Proyecto1
     {
         private string[] cadena;
         private AnalizadorLexico analizador = new AnalizadorLexico();
+        private AnalizadorSintactico sintactico;
         public Form1()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace Proyecto1
             Panel.Text = "";
             analizador.lst_token.Clear();
             int val = analizador.lst_token.Count();
-            for (int i = 0; i < val-1; i++)
+            for (int i = 0; i < val - 1; i++)
             {
                 analizador.lst_token.RemoveAt(i);
             }
@@ -82,27 +84,37 @@ namespace Proyecto1
             {
                 analizador.analizadorlexico(cadena[posfila].ToLower() + '\n', posfila, Panel);
             }
+            analizador.vacio = true;
         }
+        private void anali()
+        {
+            Console.WriteLine();
+            string linea = Panel.SelectedText;
+            string line = linea.ToLower();
+            char[] caracter = new char[line.Length];
+            for (int i = 0; i < line.Length; i++)
+            {
+                caracter[i] = line.ElementAt(i);
+            }
+            cadena = Panel.Lines;
+            for (int posfila = 0; posfila < caracter.Length; posfila++)
+            {
+                analizador.analizadorlexico(caracter[posfila].ToString(), posfila, Panel);
+            }
+        }
+
 
         private void analizador_sintactico()
         {
-            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
+            sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
             sintactico.parser();
-            try
-            {
-                sintactico.imprimir2();
-            }
-            catch (Exception)
-            {
-
-            }
         }
         private void guardar()
         {
             try
             {
                 SaveFileDialog Dialog = new SaveFileDialog();
-                Dialog.Filter = "Archivos con extension SQLE|*.sqle";
+                Dialog.Filter = "Archivos con extension SQLE| *.sqle | Archivos con extension RAAS | *.raas";
                 Dialog.Title = "Guardar";
                 string rutah = Dialog.FileName;
                 if (Dialog.ShowDialog() == DialogResult.OK)
@@ -182,10 +194,9 @@ namespace Proyecto1
 
         private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            analizador_lexico();
+            anali();
+            //analizador_lexico();
             analizador_sintactico();
-            
         }
 
         private void mostrarTokenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,14 +240,12 @@ namespace Proyecto1
 
         private void verTablasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
-            sintactico.parser();
             sintactico.vertablar();
         }
 
         private void mostrarArbolDeDerivacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AnalizadorSintactico sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
+            sintactico = new AnalizadorSintactico(analizador.lst_tokens, analizador.lst_errores);
             sintactico.parser();
             sintactico.imprirarbol();
         }
@@ -244,6 +253,24 @@ namespace Proyecto1
         private void cargarTablasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             abrir();
+        }
+
+        private void ejecutarTodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            analizador_lexico();
+            analizador_sintactico();
+
+
+        }
+
+        private void manualDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("Manual de Usuario.pdf");
+        }
+
+        private void manualTecnicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("Manual técnico.pdf");
         }
     }
 }

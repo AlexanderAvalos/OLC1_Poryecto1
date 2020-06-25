@@ -82,7 +82,10 @@ namespace Proyecto1.Analizador
             match(Tipo.S);
             S();
             Console.WriteLine("terminado");
-            raiz = stack.Pop();
+            if (stack.Count > 0)
+            {
+                raiz = stack.Pop();
+            }
         }
         public void imprirarbol()
         {
@@ -92,22 +95,32 @@ namespace Proyecto1.Analizador
         {
             sentencias();
             Nodo nodo = new Nodo(getIndex(), "S", new List<Nodo>());
-            nodo.Childs.Add(stack.Pop());
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                nodo.Childs.Add(stack.Pop());
+                stack.Push(nodo);
+            }
         }
         private void sentencias()
         {
             sentecia();
             sentenciasP();
-            Nodo sentenci = stack.Pop();
-            Nodo sent = stack.Pop();
-            Nodo nodo = new Nodo(getIndex(), "sentencias", new List<Nodo>());
-            Nodo nodo2 = new Nodo(getIndex(), "sentencia", new List<Nodo>());
-            nodo2.Childs.Add(sent);
-            nodo.Childs.Add(nodo2);
-            nodo.Childs.Add(sentenci);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo sentenci = stack.Pop();
 
+                if (stack.Count > 0)
+                {
+                    Nodo sent = stack.Pop();
+
+                    Nodo nodo = new Nodo(getIndex(), "sentencias", new List<Nodo>());
+                    Nodo nodo2 = new Nodo(getIndex(), "sentencia", new List<Nodo>());
+                    nodo2.Childs.Add(sent);
+                    nodo.Childs.Add(nodo2);
+                    nodo.Childs.Add(sentenci);
+                    stack.Push(nodo);
+                }
+            }
         }
 
         private void sentenciasP()
@@ -115,19 +128,25 @@ namespace Proyecto1.Analizador
             if (sentecia())
             {
                 sentenciasP();
-                Nodo sentenciasPrima = stack.Pop();
-                Nodo sent = stack.Pop();
-                Nodo nodo = new Nodo(getIndex(), "sentenciasP", new List<Nodo>());
-                Nodo nodo2 = new Nodo(getIndex(), "sentencia", new List<Nodo>());
-                nodo2.Childs.Add(sent);
-                nodo.Childs.Add(nodo2);
-                nodo.Childs.Add(sentenciasPrima);
-                stack.Push(nodo);
+                if (stack.Count > 0)
+                {
+                    Nodo sentenciasPrima = stack.Pop();
+                    Nodo sent = stack.Pop();
+                    Nodo nodo = new Nodo(getIndex(), "sentenciasP", new List<Nodo>());
+                    Nodo nodo2 = new Nodo(getIndex(), "sentencia", new List<Nodo>());
+                    nodo2.Childs.Add(sent);
+                    nodo.Childs.Add(nodo2);
+                    nodo.Childs.Add(sentenciasPrima);
+                    stack.Push(nodo);
+                }
             }
             else
             {
-                Nodo nodo = new Nodo(getIndex(), "epsilon", null);
-                stack.Push(nodo);
+                if (stack.Count > 0)
+                {
+                    Nodo nodo = new Nodo(getIndex(), "epsilon", null);
+                    stack.Push(nodo);
+                }
             }
         }
 
@@ -146,16 +165,19 @@ namespace Proyecto1.Analizador
             else if (preanalisis == Tipo.ELIMINAR)
             {
                 delete();
+                consulta_eliminar();
                 return true;
             }
             else if (preanalisis == Tipo.SELECCIONAR)
             {
                 select();
+                seleccionar();
                 return true;
             }
             else if (preanalisis == Tipo.ACTUALIZAR)
             {
                 update();
+                consulta_actualizar();
                 return true;
             }
             else
@@ -180,8 +202,11 @@ namespace Proyecto1.Analizador
             nodo.Childs.Add(new Nodo(getIndex(), "(", null));
             match(Tipo.SIMBOLO_PARENTESISIZQ);
             List<Columna> lst = parametros();
-            Nodo param = stack.Pop();
-            nodo.Childs.Add(param);
+            if (stack.Count > 0)
+            {
+                Nodo param = stack.Pop();
+                nodo.Childs.Add(param);
+            }
             nodo.Childs.Add(new Nodo(getIndex(), ")", null));
             match(Tipo.SIMBOLO_PARENTESISDER);
             nodo.Childs.Add(new Nodo(getIndex(), ";", null));
@@ -197,12 +222,15 @@ namespace Proyecto1.Analizador
             Columna val = parametro();
             List<Columna> lst = parametrosP();
             lst.Add(val);
-            Nodo paramet = stack.Pop();
-            Nodo param = stack.Pop();
-            Nodo nodo = new Nodo(getIndex(), "parametros", new List<Nodo>());
-            nodo.Childs.Add(param);
-            nodo.Childs.Add(paramet);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo paramet = stack.Pop();
+                Nodo param = stack.Pop();
+                Nodo nodo = new Nodo(getIndex(), "parametros", new List<Nodo>());
+                nodo.Childs.Add(param);
+                nodo.Childs.Add(paramet);
+                stack.Push(nodo);
+            }
             return lst;
         }
 
@@ -217,10 +245,13 @@ namespace Proyecto1.Analizador
                 Columna val = parametro();
                 List<Columna> lst = parametrosP();
                 lst.Add(val);
-                Nodo parametroPrima = stack.Pop();
-                Nodo param = stack.Pop();
-                nodo.Childs.Add(param);
-                nodo.Childs.Add(parametroPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo parametroPrima = stack.Pop();
+                    Nodo param = stack.Pop();
+                    nodo.Childs.Add(param);
+                    nodo.Childs.Add(parametroPrima);
+                }
                 stack.Push(nodo);
                 return lst;
             }
@@ -241,10 +272,13 @@ namespace Proyecto1.Analizador
             match(Tipo.ID);
             string tip = tipo();
             Columna columna_actual = new Columna(id, tip);
-            Nodo tipoD = stack.Pop();
-            Nodo nodo2 = new Nodo(getIndex(), "Tipo", new List<Nodo>());
-            nodo2.Childs.Add(tipoD);
-            nodo.Childs.Add(nodo2);
+            if (stack.Count > 0)
+            {
+                Nodo tipoD = stack.Pop();
+                Nodo nodo2 = new Nodo(getIndex(), "Tipo", new List<Nodo>());
+                nodo2.Childs.Add(tipoD);
+                nodo.Childs.Add(nodo2);
+            }
             stack.Push(nodo);
             return columna_actual;
         }
@@ -318,8 +352,11 @@ namespace Proyecto1.Analizador
                 }
                 actual.Filas.Add(aux);
             }
-            Nodo val = stack.Pop();
-            nodo.Childs.Add(val);
+            if (stack.Count > 0)
+            {
+                Nodo val = stack.Pop();
+                nodo.Childs.Add(val);
+            }
             nodo.Childs.Add(new Nodo(getIndex(), ")", null));
             match(Tipo.SIMBOLO_PARENTESISDER);
             nodo.Childs.Add(new Nodo(getIndex(), ";", null));
@@ -333,6 +370,7 @@ namespace Proyecto1.Analizador
             {
                 if (nombretabla == item.Nombre_tabla)
                 {
+
                     return item;
                 }
             }
@@ -343,14 +381,17 @@ namespace Proyecto1.Analizador
             string valo = valor();
             List<String> lst_valores = valoresP();
             lst_valores.Add(valo);
-            Nodo valoresPrima = stack.Pop();
-            Nodo val = stack.Pop();
-            Nodo nodo = new Nodo(getIndex(), "valores", new List<Nodo>());
-            Nodo nodo2 = new Nodo(getIndex(), "valor", new List<Nodo>());
-            nodo2.Childs.Add(val);
-            nodo.Childs.Add(nodo2);
-            nodo.Childs.Add(valoresPrima);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo valoresPrima = stack.Pop();
+                Nodo val = stack.Pop();
+                Nodo nodo = new Nodo(getIndex(), "valores", new List<Nodo>());
+                Nodo nodo2 = new Nodo(getIndex(), "valor", new List<Nodo>());
+                nodo2.Childs.Add(val);
+                nodo.Childs.Add(nodo2);
+                nodo.Childs.Add(valoresPrima);
+                stack.Push(nodo);
+            }
             return lst_valores;
         }
 
@@ -366,11 +407,14 @@ namespace Proyecto1.Analizador
                 string valo = valor();
                 List<String> lst_valores = valoresP();
                 lst_valores.Add(valo);
-                Nodo valoresPrima = stack.Pop();
-                Nodo val = stack.Pop();
-                nodo2.Childs.Add(val);
-                nodo.Childs.Add(nodo2);
-                nodo.Childs.Add(valoresPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo valoresPrima = stack.Pop();
+                    Nodo val = stack.Pop();
+                    nodo2.Childs.Add(val);
+                    nodo.Childs.Add(nodo2);
+                    nodo.Childs.Add(valoresPrima);
+                }
                 stack.Push(nodo);
                 return lst_valores;
             }
@@ -424,28 +468,37 @@ namespace Proyecto1.Analizador
             match(Tipo.SELECCIONAR);
             List<string> camp = campos();
             instruccionSelect.Add(camp);
-            Nodo camposs = stack.Pop();
-            Nodo nodo2 = new Nodo(getIndex(), "campos", new List<Nodo>());
-            nodo2.Childs.Add(camposs);
-            nodo.Childs.Add(nodo2);
+            if (stack.Count > 0)
+            {
+                Nodo camposs = stack.Pop();
+                Nodo nodo2 = new Nodo(getIndex(), "campos", new List<Nodo>());
+                nodo2.Childs.Add(camposs);
+
+                nodo.Childs.Add(nodo2);
+            }
             nodo.Childs.Add(new Nodo(getIndex(), "DE", null));
             match(Tipo.DE);
             List<string> tab = tablas();
             instruccionSelect.Add(tab);
-            Nodo tabl = stack.Pop();
-            Nodo nodo3 = new Nodo(getIndex(), "tablas", new List<Nodo>());
-            nodo3.Childs.Add(tabl);
-            nodo.Childs.Add(nodo3);
+            if (stack.Count > 0)
+            {
+                Nodo tabl = stack.Pop();
+                Nodo nodo3 = new Nodo(getIndex(), "tablas", new List<Nodo>());
+                nodo3.Childs.Add(tabl);
+                nodo.Childs.Add(nodo3);
+            }
             List<string> whee = where();
             instruccionSelect.Add(whee);
-            Nodo whe = stack.Pop();
-            Nodo nodo4 = new Nodo(getIndex(), "where", new List<Nodo>());
-            nodo4.Childs.Add(whe);
-            nodo.Childs.Add(nodo4);
+            if (stack.Count > 0)
+            {
+                Nodo whe = stack.Pop();
+                Nodo nodo4 = new Nodo(getIndex(), "where", new List<Nodo>());
+                nodo4.Childs.Add(whe);
+                nodo.Childs.Add(nodo4);
+            }
             match(Tipo.SIMBOLO_PUNTOYCOMA);
             stack.Push(nodo);
             instruccionSelect.Add(temp);
-            instruccionSelect.Add(temp2);
         }
 
         private List<string> campos()
@@ -453,14 +506,17 @@ namespace Proyecto1.Analizador
             List<string> val = campo();
             List<string> camp = camposP();
             val.AddRange(camp);
-            Nodo camposPrima = stack.Pop();
-            Nodo camposs = stack.Pop();
-            Nodo nodo = new Nodo(getIndex(), "campos", new List<Nodo>());
-            Nodo nodo2 = new Nodo(getIndex(), "campo", new List<Nodo>());
-            nodo2.Childs.Add(camposs);
-            nodo.Childs.Add(nodo2);
-            nodo.Childs.Add(camposPrima);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo camposPrima = stack.Pop();
+                Nodo camposs = stack.Pop();
+                Nodo nodo = new Nodo(getIndex(), "campos", new List<Nodo>());
+                Nodo nodo2 = new Nodo(getIndex(), "campo", new List<Nodo>());
+                nodo2.Childs.Add(camposs);
+                nodo.Childs.Add(nodo2);
+                nodo.Childs.Add(camposPrima);
+                stack.Push(nodo);
+            }
             return val;
         }
 
@@ -475,12 +531,15 @@ namespace Proyecto1.Analizador
                 List<string> valor = campo();
                 List<string> lst = camposP();
                 valor.AddRange(lst);
-                Nodo camposPrima = stack.Pop();
-                Nodo nodo2 = new Nodo(getIndex(), "campo", new List<Nodo>());
-                Nodo camp = stack.Pop();
-                nodo2.Childs.Add(camp);
-                nodo.Childs.Add(nodo2);
-                nodo.Childs.Add(camposPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo camposPrima = stack.Pop();
+                    Nodo nodo2 = new Nodo(getIndex(), "campo", new List<Nodo>());
+                    Nodo camp = stack.Pop();
+                    nodo2.Childs.Add(camp);
+                    nodo.Childs.Add(nodo2);
+                    nodo.Childs.Add(camposPrima);
+                }
                 stack.Push(nodo);
                 return valor;
             }
@@ -504,8 +563,11 @@ namespace Proyecto1.Analizador
                 string id = campoP();
                 lst.Add(id);
                 temp2.Add(i);
-                Nodo campp = stack.Pop();
-                nodo.Childs.Add(campp);
+                if (stack.Count > 0)
+                {
+                    Nodo campp = stack.Pop();
+                    nodo.Childs.Add(campp);
+                }
                 stack.Push(nodo);
                 return lst;
             }
@@ -533,8 +595,11 @@ namespace Proyecto1.Analizador
                 nodo.Childs.Add(new Nodo(getIndex(), ".", null));
                 match(Tipo.SIMBOLO_PUNTO);
                 string id = campoB();
-                Nodo campB = stack.Pop();
-                nodo.Childs.Add(campB);
+                if (stack.Count > 0)
+                {
+                    Nodo campB = stack.Pop();
+                    nodo.Childs.Add(campB);
+                }
                 stack.Push(nodo);
                 return id;
             }
@@ -558,8 +623,11 @@ namespace Proyecto1.Analizador
                 string id = lst_token.ElementAt(indice).Lexema;
                 match(Tipo.ID);
                 campoBprima();
-                Nodo com = stack.Pop();
-                nodo.Childs.Add(com);
+                if (stack.Count > 0)
+                {
+                    Nodo com = stack.Pop();
+                    nodo.Childs.Add(com);
+                }
                 stack.Push(nodo);
                 return id;
             }
@@ -584,10 +652,13 @@ namespace Proyecto1.Analizador
             if (preanalisis == Tipo.COMO)
             {
                 como();
-                Nodo nodo = new Nodo(getIndex(), "campoBprima", new List<Nodo>());
-                Nodo com = stack.Pop();
-                nodo.Childs.Add(com);
-                stack.Push(nodo);
+                if (stack.Count > 0)
+                {
+                    Nodo nodo = new Nodo(getIndex(), "campoBprima", new List<Nodo>());
+                    Nodo com = stack.Pop();
+                    nodo.Childs.Add(com);
+                    stack.Push(nodo);
+                }
             }
             else
             {
@@ -628,10 +699,13 @@ namespace Proyecto1.Analizador
             match(Tipo.ID);
             List<string> tab = tablasP();
             tab.Add(tabla);
-            Nodo tablasPrima = stack.Pop();
-            Nodo nodo2 = new Nodo(getIndex(), "tablasP", new List<Nodo>());
-            nodo2.Childs.Add(tablasPrima);
-            nodo.Childs.Add(nodo2);
+            if (stack.Count > 0)
+            {
+                Nodo tablasPrima = stack.Pop();
+                Nodo nodo2 = new Nodo(getIndex(), "tablasP", new List<Nodo>());
+                nodo2.Childs.Add(tablasPrima);
+                nodo.Childs.Add(nodo2);
+            }
             stack.Push(nodo);
             return tab;
         }
@@ -648,8 +722,11 @@ namespace Proyecto1.Analizador
                 match(Tipo.ID);
                 List<string> tab = tablasP();
                 tab.Add(ta);
-                Nodo tablasPrima = stack.Pop();
-                nodo.Childs.Add(tablasPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo tablasPrima = stack.Pop();
+                    nodo.Childs.Add(tablasPrima);
+                }
                 stack.Push(nodo);
                 return tab;
             }
@@ -668,8 +745,11 @@ namespace Proyecto1.Analizador
                 nodo.Childs.Add(new Nodo(getIndex(), "DONDE", null));
                 match(Tipo.DONDE);
                 List<string> val = condiciones();
-                Nodo condicio = stack.Pop();
-                nodo.Childs.Add(condicio);
+                if (stack.Count > 0)
+                {
+                    Nodo condicio = stack.Pop();
+                    nodo.Childs.Add(condicio);
+                }
                 stack.Push(nodo);
                 return val;
             }
@@ -687,12 +767,15 @@ namespace Proyecto1.Analizador
             List<string> lst2 = condicion();
             List<string> lst = condicionesP();
             lst.AddRange(lst2);
-            Nodo condicionPrima = stack.Pop();
-            Nodo cond = stack.Pop();
-            Nodo nodo = new Nodo(getIndex(), "condiciones", new List<Nodo>());
-            nodo.Childs.Add(cond);
-            nodo.Childs.Add(condicionPrima);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo condicionPrima = stack.Pop();
+                Nodo cond = stack.Pop();
+                Nodo nodo = new Nodo(getIndex(), "condiciones", new List<Nodo>());
+                nodo.Childs.Add(cond);
+                nodo.Childs.Add(condicionPrima);
+                stack.Push(nodo);
+            }
             return lst;
         }
 
@@ -705,13 +788,15 @@ namespace Proyecto1.Analizador
                 match(Tipo.Y);
                 List<string> lst2 = condicion();
                 List<string> lst = condicionesP();
-
                 lst.AddRange(lst2);
                 lst.Add("Y");
-                Nodo condicionPrima = stack.Pop();
-                Nodo cond = stack.Pop();
-                nodo.Childs.Add(cond);
-                nodo.Childs.Add(condicionPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo condicionPrima = stack.Pop();
+                    Nodo cond = stack.Pop();
+                    nodo.Childs.Add(cond);
+                    nodo.Childs.Add(condicionPrima);
+                }
                 stack.Push(nodo);
                 return lst;
             }
@@ -724,10 +809,13 @@ namespace Proyecto1.Analizador
                 List<string> lst = condicionesP();
                 lst.AddRange(lst2);
                 lst.Add("O");
-                Nodo condicionPrima = stack.Pop();
-                Nodo cond = stack.Pop();
-                nodo.Childs.Add(cond);
-                nodo.Childs.Add(condicionPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo condicionPrima = stack.Pop();
+                    Nodo cond = stack.Pop();
+                    nodo.Childs.Add(cond);
+                    nodo.Childs.Add(condicionPrima);
+                }
                 stack.Push(nodo);
                 return lst;
             }
@@ -748,9 +836,12 @@ namespace Proyecto1.Analizador
             match(Tipo.ID);
             List<string> lst = condicionP();
             lst.Add(todo);
-            Nodo condicionPrima = stack.Pop();
-            nodo.Childs.Add(condicionPrima);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo condicionPrima = stack.Pop();
+                nodo.Childs.Add(condicionPrima);
+                stack.Push(nodo);
+            }
             return lst;
         }
 
@@ -770,15 +861,17 @@ namespace Proyecto1.Analizador
                 List<string> lst = valorP();
                 lst.Add(val2);
                 lst.Add(todo);
-
-                Nodo simb = stack.Pop();
-                Nodo val = stack.Pop();
-                Nodo nodo3 = new Nodo(getIndex(), "simbolo", new List<Nodo>());
-                Nodo nodo2 = new Nodo(getIndex(), "valorP", new List<Nodo>());
-                nodo2.Childs.Add(val);
-                nodo3.Childs.Add(simb);
-                nodo.Childs.Add(nodo2);
-                nodo.Childs.Add(nodo3);
+                if (stack.Count > 0)
+                {
+                    Nodo simb = stack.Pop();
+                    Nodo val = stack.Pop();
+                    Nodo nodo3 = new Nodo(getIndex(), "simbolo", new List<Nodo>());
+                    Nodo nodo2 = new Nodo(getIndex(), "valorP", new List<Nodo>());
+                    nodo2.Childs.Add(val);
+                    nodo3.Childs.Add(simb);
+                    nodo.Childs.Add(nodo2);
+                    nodo.Childs.Add(nodo3);
+                }
                 nodo.Childs.Add(new Nodo(getIndex(), ";", null));
                 match(Tipo.SIMBOLO_PUNTOYCOMA);
                 stack.Push(nodo);
@@ -790,10 +883,13 @@ namespace Proyecto1.Analizador
                 string val2 = simbolo();
                 List<string> lst = valorP();
                 lst.Add(val2);
-                Nodo simb = stack.Pop();
-                Nodo val = stack.Pop();
-                nodo.Childs.Add(val);
-                nodo.Childs.Add(simb);
+                if (stack.Count > 0)
+                {
+                    Nodo simb = stack.Pop();
+                    Nodo val = stack.Pop();
+                    nodo.Childs.Add(val);
+                    nodo.Childs.Add(simb);
+                }
                 nodo.Childs.Add(new Nodo(getIndex(), ";", null));
                 match(Tipo.SIMBOLO_PUNTOYCOMA);
                 stack.Push(nodo);
@@ -888,28 +984,33 @@ namespace Proyecto1.Analizador
         }
         private void delete()
         {
+            instruccioneliminar = new List<List<string>>();
             List<string> tabla = new List<string>();
             Nodo nodo = new Nodo(getIndex(), "delete", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), "ELIMINAR", null));
             match(Tipo.ELIMINAR);
             nodo.Childs.Add(new Nodo(getIndex(), "DE", null));
             match(Tipo.DE);
+            nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
             string id = lst_token.ElementAt(indice).Lexema;
             tabla.Add(id);
             instruccioneliminar.Add(tabla);
-            nodo.Childs.Add(new Nodo(getIndex(), lst_token.ElementAt(indice).Lexema, null));
             match(Tipo.ID);
             List<string> cond = where();
             instruccioneliminar.Add(cond);
-            Nodo whe = stack.Pop();
-            Nodo nodo2 = new Nodo(getIndex(), "where", new List<Nodo>());
-            nodo2.Childs.Add(whe);
-            nodo.Childs.Add(nodo2);
+            if (stack.Count > 0)
+            {
+                Nodo whe = stack.Pop();
+                Nodo nodo2 = new Nodo(getIndex(), "where", new List<Nodo>());
+                nodo2.Childs.Add(whe);
+                nodo.Childs.Add(nodo2);
+            }
             stack.Push(nodo);
         }
 
         private void update()
         {
+            instruccionactualizar = new List<List<string>>();
             List<string> tabla = new List<string>();
             Nodo nodo = new Nodo(getIndex(), "update", new List<Nodo>());
             nodo.Childs.Add(new Nodo(getIndex(), "ACTUALIZAR", null));
@@ -918,7 +1019,6 @@ namespace Proyecto1.Analizador
             string id = lst_token.ElementAt(indice).Lexema;
             tabla.Add(id);
             instruccionactualizar.Add(tabla);
-            Console.WriteLine(id);
             match(Tipo.ID);
             nodo.Childs.Add(new Nodo(getIndex(), "ESTABLECER", null));
             match(Tipo.ESTABLECER);
@@ -926,16 +1026,22 @@ namespace Proyecto1.Analizador
             match(Tipo.SIMBOLO_PARENTESISIZQ);
             List<string> lst = asignaciones();
             instruccionactualizar.Add(lst);
-            Nodo asig = stack.Pop();
-            nodo.Childs.Add(asig);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo asig = stack.Pop();
+                nodo.Childs.Add(asig);
+            }
             nodo.Childs.Add(new Nodo(getIndex(), ")", null));
             match(Tipo.SIMBOLO_PARENTESISDER);
             List<string> cond = where();
             instruccionactualizar.Add(cond);
-            Nodo co = stack.Pop();
-            nodo.Childs.Add(co);
+            if (stack.Count > 0)
+            {
+                Nodo co = stack.Pop();
+                nodo.Childs.Add(co);
+            }
             stack.Push(nodo);
+
         }
 
         private List<string> asignaciones()
@@ -943,14 +1049,17 @@ namespace Proyecto1.Analizador
             List<string> lst2 = asignacion();
             List<string> lst = asignacionesP();
             lst2.AddRange(lst);
-            Nodo asignacionPrima = stack.Pop();
-            Nodo asig = stack.Pop();
-            Nodo nodo = new Nodo(getIndex(), "asignaciones", new List<Nodo>());
-            Nodo nodo2 = new Nodo(getIndex(), "asig", new List<Nodo>());
-            nodo2.Childs.Add(asig);
-            nodo.Childs.Add(nodo2);
-            nodo.Childs.Add(asignacionPrima);
-            stack.Push(nodo);
+            if (stack.Count > 0)
+            {
+                Nodo asignacionPrima = stack.Pop();
+                Nodo asig = stack.Pop();
+                Nodo nodo = new Nodo(getIndex(), "asignaciones", new List<Nodo>());
+                Nodo nodo2 = new Nodo(getIndex(), "asig", new List<Nodo>());
+                nodo2.Childs.Add(asig);
+                nodo.Childs.Add(nodo2);
+                nodo.Childs.Add(asignacionPrima);
+                stack.Push(nodo);
+            }
             return lst2;
         }
 
@@ -964,12 +1073,15 @@ namespace Proyecto1.Analizador
                 List<string> lst2 = asignacion();
                 List<string> lst = asignacionesP();
                 lst2.AddRange(lst);
-                Nodo asignacionPrima = stack.Pop();
-                Nodo asig = stack.Pop();
-                Nodo nodo2 = new Nodo(getIndex(), "asig", new List<Nodo>());
-                nodo2.Childs.Add(asig);
-                nodo.Childs.Add(nodo2);
-                nodo.Childs.Add(asignacionPrima);
+                if (stack.Count > 0)
+                {
+                    Nodo asignacionPrima = stack.Pop();
+                    Nodo asig = stack.Pop();
+                    Nodo nodo2 = new Nodo(getIndex(), "asig", new List<Nodo>());
+                    nodo2.Childs.Add(asig);
+                    nodo.Childs.Add(nodo2);
+                    nodo.Childs.Add(asignacionPrima);
+                }
                 stack.Push(nodo);
                 return lst2;
             }
@@ -994,8 +1106,11 @@ namespace Proyecto1.Analizador
             match(Tipo.SIMBOLO_IGUAL);
             string valo = valor();
             lst.Add(valo);
-            Nodo val = stack.Pop();
-            nodo.Childs.Add(val);
+            if (stack.Count > 0)
+            {
+                Nodo val = stack.Pop();
+                nodo.Childs.Add(val);
+            }
             stack.Push(nodo);
             return lst;
         }
@@ -1167,7 +1282,7 @@ namespace Proyecto1.Analizador
         }
 
         // consulta seleccionar ----------------------------------------------------------------------------------------------------------------------
-        public void imprimir2()
+        public void seleccionar()
         {
             Tabla taux;
             Tabla nueva = new Tabla();
@@ -1190,40 +1305,36 @@ namespace Proyecto1.Analizador
                 else
                 {
                     string tablaactual = tab.ElementAt(0);
-                    for (int i = 0; i < condiciones.Count; i++)
+                    int i = 0;
+                    int act = i;
+                    string valor = condiciones.ElementAt(act);
+                    string simbolo = condiciones.ElementAt(act + 1);
+                    string llave = condiciones.ElementAt(act + 2);
+                    if (condiciones.Count > 4)
                     {
-                        int act = i;
-                        string valor = condiciones.ElementAt(act);
-                        string simbolo = condiciones.ElementAt(act + 1);
-                        string llave = condiciones.ElementAt(act + 2);
-                        if (condiciones.Count > 4)
+                        if (condiciones.ElementAt(act + 3) == "Y" || condiciones.ElementAt(act + 3) == "O")
                         {
-                            if (condiciones.ElementAt(act + 3) == "Y" || condiciones.ElementAt(act + 3) == "O")
-                            {
-                                i = act;
-                            }
+                            i = act;
                         }
-                        Tabla aux = buscar(tablaactual);
-
-                        foreach (var item in aux.Columnas)
+                    }
+                    Tabla aux = buscar(tablaactual);
+                    foreach (var item in aux.Columnas)
+                    {
+                        Columna nuevaC = new Columna(item.Nombre, item.Tipo);
+                        nueva.Columnas.Add(nuevaC);
+                    }
+                    foreach (var raw in aux.Filas)
+                    {
+                        foreach (var row in raw)
                         {
-                            Columna nuevaC = new Columna(item.Nombre, item.Tipo);
-                            nueva.Columnas.Add(nuevaC);
-                        }
-                        foreach (var raw in aux.Filas)
-                        {
-                            foreach (var row in raw)
+                            if (row.Key == llave)
                             {
-                                if (row.Key == llave)
+                                if (verificar(valor, simbolo, row.Value.ToString()))
                                 {
-                                    if (verificar(valor, simbolo, row.Value.ToString()))
-                                    {
-                                        nueva.Filas.Add(raw);
-                                    }
+                                    nueva.Filas.Add(raw);
                                 }
                             }
                         }
-                        break;
                     }
                 }
             }
@@ -1355,83 +1466,178 @@ namespace Proyecto1.Analizador
             }
         }
         // fin seleccion
-        // consulta actualizar
-        private void consulta_actualizar()
+        // consulta actualizar--------------------------------------------------------------------------------------------------------------------------
+        public void consulta_actualizar()
         {
+            Tabla nueva = new Tabla();
+            List<string> tabla = instruccionactualizar.ElementAt(0);
+            List<string> nuevo = instruccionactualizar.ElementAt(1);
+            List<string> condiciones = instruccionactualizar.ElementAt(2);
+            string tablaactual = "";
+            int contador = 0;
+            if (condiciones.Count > 0)
+            {
+                tablaactual = tabla.ElementAt(0);
+                int i = 0;
+                int act = i, act2 = i;
+                string valor = condiciones.ElementAt(act);
+                string simbolo = condiciones.ElementAt(act + 1);
+                string llave = condiciones.ElementAt(act + 2);
+                string kay = nuevo.ElementAt(act2);
+                string novo = nuevo.ElementAt(act2 + 1);
+                Console.WriteLine(kay + " " + novo);
+                Console.WriteLine(valor + " " + simbolo + " " + llave + "");
+                if (condiciones.Count > 4)
+                {
+                    if (condiciones.ElementAt(act + 3) == "Y" || condiciones.ElementAt(act + 3) == "O")
+                    {
+                        i = act;
 
+                    }
+                }
 
+                Tabla aux = buscar(tablaactual);
+                foreach (var item in aux.Columnas)
+                {
+                    Columna nuevaC = new Columna(item.Nombre, item.Tipo);
+                    nueva.Columnas.Add(nuevaC);
+                }
+                contador = 0;
+                foreach (var raw in aux.Filas)
+                {
+                    foreach (var row in raw)
+                    {
+                        if (row.Key == llave)
+                        {
+                            if (verificar(valor, simbolo, row.Value.ToString()))
+                            {
+                                nueva.Filas.Add(modificarvalor(raw, kay, novo));
+                            }
+                            else
+                            {
+                                nueva.Filas.Add(raw);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < lst_tablas.Count; i++)
+                {
+                    if (tabla.ElementAt(0) == lst_tablas.ElementAt(i).Nombre_tabla)
+                    {
+                        lst_tablas.RemoveAt(i);
+                    }
+                }
+            }
+
+            for (int i = 0; i < lst_tablas.Count; i++)
+            {
+                if (tabla.ElementAt(0) == lst_tablas.ElementAt(i).Nombre_tabla)
+                {
+                    lst_tablas.RemoveAt(i);
+                    lst_tablas.Add(nueva);
+                }
+            }
+            if (nueva.Columnas.Count > 0 && nueva.Filas.Count > 0)
+            {
+                nueva.Nombre_tabla = tablaactual;
+                conSelect(nueva);
+            }
+        }
+
+        private Dictionary<string, object> modificarvalor(Dictionary<string, object> aux2, string llave, string nuevo)
+        {
+            Dictionary<string, object> aux = new Dictionary<string, object>();
+            foreach (var item in aux2)
+            {
+                if (item.Key == llave)
+                {
+                    aux.Add(llave, nuevo);
+                }
+                else
+                {
+                    aux.Add(item.Key, item.Value);
+                }
+
+            }
+            return aux;
         }
         // consulta eliminar
-        private void consulta_eliminar()
+        public void consulta_eliminar()
         {
+            Tabla nueva = new Tabla();
+            List<string> tabla = instruccioneliminar.ElementAt(0);
+            List<string> condiciones = instruccioneliminar.ElementAt(1);
+            string tablaactual = "";
+            if (condiciones.Count > 0)
+            {
+                Console.WriteLine(tabla.ElementAt(0));
+                tablaactual = tabla.ElementAt(0);
+                int i = 0;
+                int act = i;
+                string valor = condiciones.ElementAt(act);
+                string simbolo = condiciones.ElementAt(act + 1);
+                string llave = condiciones.ElementAt(act + 2);
+                Console.WriteLine(valor + " " + simbolo + " " + llave + "");
+                if (condiciones.Count > 4)
+                {
+                    if (condiciones.ElementAt(act + 3) == "Y" || condiciones.ElementAt(act + 3) == "O")
+                    {
+                        i = act;
+                    }
+                }
 
+                Tabla aux = buscar(tablaactual);
+                foreach (var item in aux.Columnas)
+                {
+                    Columna nuevaC = new Columna(item.Nombre, item.Tipo);
+                    nueva.Columnas.Add(nuevaC);
+                }
+                foreach (var raw in aux.Filas)
+                {
+                    foreach (var row in raw)
+                    {
+                        if (row.Key == llave)
+                        {
+                            if (verificar(valor, simbolo, row.Value.ToString()))
+                            {
 
+                            }
+                            else
+                            {
+                                nueva.Filas.Add(raw);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < lst_tablas.Count; i++)
+                {
+                    if (tabla.ElementAt(0) == lst_tablas.ElementAt(i).Nombre_tabla)
+                    {
+                        lst_tablas.RemoveAt(i);
+                    }
+                }
+            }
+
+            for (int i = 0; i < lst_tablas.Count; i++)
+            {
+                if (tabla.ElementAt(0) == lst_tablas.ElementAt(i).Nombre_tabla)
+                {
+                    lst_tablas.RemoveAt(i);
+                    lst_tablas.Add(nueva);
+                }
+            }
+            if (nueva.Columnas.Count > 0 && nueva.Filas.Count > 0)
+            {
+                nueva.Nombre_tabla = tablaactual;
+                conSelect(nueva);
+            }
         }
 
     }
 }
-
-//nueva.Nombre_tabla = "tablaAuxiliar";
-//nueva.Columnas = caux;
-//nueva.Filas = faux;
-//foreach (var item in nueva.Columnas)
-//{
-//    Console.Write(item.Nombre + "  ");
-//}
-//Console.WriteLine();
-//foreach (var item in nueva.Filas)
-//{
-//    for (int i = item.Count - 1; i >= 0; i--)
-//    {
-//        Console.Write(item.ElementAt(i).Value + "  ");
-//    }
-//    Console.WriteLine();
-//}
-//  if (aux1.Count > 0)
-//            {
-//                foreach (var item in aux1)
-//                {
-//                    if (item != "*")
-//                    {
-//                        taux = buscar(item);
-//                        foreach (var item2 in taux.Columnas)
-//                        {
-//                            if (aux.Count > 0)
-//                            {
-//                                for (int i = aux3.Count - 1; i >= 0; i--)
-//                                {
-//                                    foreach (var item3 in aux)
-//                                    {
-//                                        if (item2.Nombre == item3)
-//                                        {
-//                                            Columna col = new Columna(aux3.ElementAt(i), item2.Tipo);
-//caux.Add(col);
-//                                            break;
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                            break;
-//                        }
-
-//                        foreach (var item2 in taux.Filas)
-//                        {
-//                            foreach (var item3 in item2)
-//                            {
-//                                for (int i = aux3.Count - 1; i >= 0; i--)
-//                                {
-//                                    foreach (var item4 in aux)
-//                                    {
-//                                        if (item3.Key == item4)
-//                                        {
-//                                            Dictionary<string, object> fil = new Dictionary<string, object>();
-//fil.Add(aux3.ElementAt(i), item3.Value);
-//                                            faux.Add(fil);
-
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
